@@ -1,10 +1,12 @@
 from flet import *
 from views.viewLogin import ViewLogin
-
+from views.viewHome import ViewHome
 def main(page:Page):
 
 
     telaLogin=ViewLogin()
+    barHome=ViewHome()
+    telaLogin.btn_enter.on_click=lambda e: page.go("/home")
 
     def changeRoutes(route):
         page.views.clear()
@@ -24,7 +26,7 @@ def main(page:Page):
                 View(
                     route="/home",
                     controls=[
-                        Text("Sei la pagina")
+                        barHome
 
                     ]
                 )
