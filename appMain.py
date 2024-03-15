@@ -4,6 +4,17 @@ from views.viewHome import ViewHome
 def main(page:Page):
 
 
+
+    optionsMenu=NavigationDrawer(
+        controls=[
+            NavigationDrawerDestination(
+                label="Item 1",
+                icon=icons.DOOR_BACK_DOOR_OUTLINED,
+                selected_icon_content=Icon(icons.DOOR_BACK_DOOR),
+            ),
+        ]
+    )
+
     telaLogin=ViewLogin()
     barHome=ViewHome()
     telaLogin.btn_enter.on_click=lambda e: page.go("/home")
