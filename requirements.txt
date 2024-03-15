@@ -1,4 +1,4 @@
-attrs
+ttrs
 Faker
 iniconfig
 packaging
@@ -13,4 +13,4 @@ toml
 reportlab
 flet
 holidays
-reportlab
+reportlaba

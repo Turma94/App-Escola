@@ -2,7 +2,7 @@ from Model.materia import Materia
 from Model.usuarios.professor import Professor
 from Model.turma import Turma
 from Model.aula import Aula
-from testes.descobrindo_dia_semana import validar_data
+from utils.descobrindo_dia_semana import validar_data
 from datetime import date
 
 # Materias
