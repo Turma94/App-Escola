@@ -2,6 +2,8 @@ from flet import *
 from views.viewLogin import ViewLogin
 from views.viewHome import ViewHome
 from views.elements.optionsMenuHide import OptionsMenuHide
+from views.painels.painelProfessor import PainelProfessor
+
 def main(page:Page):
 
 
@@ -17,6 +19,9 @@ def main(page:Page):
     barHome = ViewHome()
     barHome.btn_menu_hide.on_click = openMenuHide
     optionsMenu = OptionsMenuHide()
+
+    #Painel Professor
+    painelProf=PainelProfessor()
 
 
 
@@ -40,7 +45,8 @@ def main(page:Page):
                 View(
                     route="/home",
                     controls=[
-                        barHome
+                        barHome,
+                        painelProf
 
                     ], drawer=optionsMenu
                 )
