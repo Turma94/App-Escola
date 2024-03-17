@@ -1,12 +1,12 @@
 from flet import *
 
 class NewProfessor(UserControl):
-    def __init__(self, name, sobrenome,contrato,delete_prof):
+    def __init__(self, name, sobrenome, contrato, delete_prof):
         super().__init__()
         self.name = name
-        self.sobrenome=sobrenome
-        self.contrato=contrato
-        self.delete_prof=delete_prof
+        self.sobrenome = sobrenome
+        self.contrato = contrato
+        self.delete_prof = delete_prof
 
     def build(self):
         self.display_prof = Checkbox(value=False, label=f"{self.name} | "
@@ -69,8 +69,8 @@ class NewProfessor(UserControl):
 
     def edit_clicked(self, e):
         self.edit_name.value = str(self.display_prof.label).split(" | ")[0]
-        self.edit_sobrenome.value=str(self.display_prof.label).split(" | ")[1]
-        self.edit_drop_contrato.value=str(self.display_prof.label).split(" | ")[2]
+        self.edit_sobrenome.value = str(self.display_prof.label).split(" | ")[1]
+        self.edit_drop_contrato.value = str(self.display_prof.label).split(" | ")[2]
 
         self.display_view.visible = False
         self.edit_view.visible = True
@@ -95,7 +95,7 @@ class NewProfessor(UserControl):
 
 class PainelProfessor(UserControl):
     def build(self):
-        self.titulo=Text("Professor",size=38)
+        self.titulo=Text("Professor", size=38)
         self.t_field_name = TextField(label="Nome")
         self.t_field_sobrenome = TextField(label="Sobrenome",)
         self.drop_contrato=Dropdown(
@@ -110,31 +110,28 @@ class PainelProfessor(UserControl):
         )
 
         self.list_prof = Column(alignment=MainAxisAlignment.CENTER)
-
         # application's root control (i.e. "view") containing all other controls
         return Column(
 
             controls=[
-                Row(controls=[self.titulo],alignment=MainAxisAlignment.CENTER),
+                Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
                 Divider(thickness=2),
                 Row(
                     controls=[
-                        Row(controls=[self.t_field_name,self.t_field_sobrenome,self.drop_contrato]),
+                        Row(controls=[self.t_field_name, self.t_field_sobrenome, self.drop_contrato]),
                         FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
-                    ],
-                    alignment=MainAxisAlignment.CENTER
+
+                    ], alignment=MainAxisAlignment.CENTER
                 ),
                 Row(controls=[self.list_prof], alignment=MainAxisAlignment.CENTER)
-            ],
+            ]
 
         )
 
     def add_clicked(self, e):
-        self.list_prof.controls.append(Checkbox(label=f"{self.t_field_name.value} |"
-                                                          f" {self.t_field_sobrenome.value} | "
-                                                      f"{self.drop_contrato.value}"))
-        self.t_field_name.value= ""
-        self.t_field_sobrenome.value=""
+        self.list_prof.controls.append(Checkbox(label=f"{self.t_field_name.value} | {self.t_field_sobrenome.value} | {self.drop_contrato.value}"))
+        self.t_field_name.value = ""
+        self.t_field_sobrenome.value = ""
         self.update()
 
     def prof_delete(self, professor):

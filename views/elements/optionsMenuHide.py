@@ -5,38 +5,38 @@ class OptionsMenuHide(NavigationDrawer):
     def __init__(self):
         super().__init__()
         # Options
-        self.btnHome=NavigationDrawerDestination(
+        self.btnHome = NavigationDrawerDestination(
                 label="Home",
                 icon=icons.HOME,
                 selected_icon_content=Icon(icons.HOME_OUTLINED),
             )
-        self.btnProfessores=NavigationDrawerDestination(
+        self.btnProfessores = NavigationDrawerDestination(
                 label="Professores",
                 icon=icons.PERSON_ADD_ALT_SHARP,
                 selected_icon_content=Icon(icons.PERSON_ADD_ALT_OUTLINED),
             )
-        self.btnMateria= NavigationDrawerDestination(
+        self.btnMateria = NavigationDrawerDestination(
                 label="Matérias",
                 icon=icons.ASSIGNMENT,
-                selected_icon_content=Icon(icons.ASSIGNMENT),
+                selected_icon_content=Icon(icons.ASSIGNMENT_OUTLINED),
             )
-        self.btnAulas=NavigationDrawerDestination(
+        self.btnAulas = NavigationDrawerDestination(
                 label="Aulas",
                 icon=icons.CALENDAR_TODAY,
                 selected_icon_content=Icon(icons.CALENDAR_TODAY_OUTLINED),
             )
-        self.btnRelatorio=NavigationDrawerDestination(
+        self.btnRelatorio = NavigationDrawerDestination(
                 label="Relatório",
                 icon=icons.FOLDER,
                 selected_icon_content=Icon(icons.FOLDER_OUTLINED),
             )
-        self.btnExit=NavigationDrawerDestination(
+        self.btnExit = NavigationDrawerDestination(
                 label="Sair",
                 icon=icons.EXIT_TO_APP,
                 selected_icon_content=Icon(icons.EXIT_TO_APP),
             )
 
-        self.controls=[
+        self.controls = [
             self.btnHome,
             Divider(thickness=2),
             self.btnProfessores,
