@@ -20,9 +20,4 @@ class Materia:
     def addProfessor(self, professor):
         self.__professores.append(professor)
 
-#apena um teste
-
-
-
-if __name__ == '__main__':
-    pass
+#Teste 2
