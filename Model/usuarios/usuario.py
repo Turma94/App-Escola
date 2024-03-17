@@ -9,27 +9,27 @@ class User(ABC):
 
 
     @property
-    def getId(self):
+    def id(self):
         return self.__id
 
     @property
-    def getNome(self):
+    def nome(self):
         return self.__nome
 
     @property
-    def getSenha(self):
+    def senha(self):
         return self.__senha
 
     @property
-    def getNivel(self):
+    def nivel(self):
         return self.__nivel
 
 
-    @getNome.setter
+    @nome.setter
     def setNome(self, nome):
         self.__nome = nome
 
-    @getSenha.setter
+    @senha.setter
     def setSenha(self, senha):
         self.__senha = senha
 

@@ -5,6 +5,7 @@ class Turma:
         self.__indentficador = identificador
         self.__anoLetivo = anoLetivo
         self.__periodo = periodo
+        self.__aulas: list
 
 
     @property
