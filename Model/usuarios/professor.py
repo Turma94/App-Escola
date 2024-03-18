@@ -81,6 +81,7 @@ class Professor(User):
                 self.__aulas.append(entradaAula)
 
 
+
 if __name__ == '__main__':
 
     materia1 = Materia("1", "Português")
