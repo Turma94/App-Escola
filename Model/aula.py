@@ -2,32 +2,37 @@ from Model.materia import Materia
 from Model.turma import Turma
 
 class Aula:
-    def __init__(self, idAula, idTurma:Turma, idProfessor, idMateia:Materia, numeroAula, data, status=False):
+    def __init__(self, ID_aula, turma:Turma, professorResponsavel, professorPresente, mateia:Materia, numeroAula, data, status=False):
 
-        self.__idAula = idAula
-        self.__idTurma = idTurma
-        self.__idProfessor = idProfessor
-        self.__idMateia = idMateia
+        self.__ID_aula = ID_aula
+        self.__turma = turma
+        self.__professorResponsavel = professorResponsavel
+        self.__professorPresente = professorPresente
+        self.__mateia = mateia
         self.__numeroAula = numeroAula
         self.__data = data
         self.__status = status
 
 
     @property
-    def idAula(self):
-        return self.__idAula
+    def ID_aula(self):
+        return self.__ID_aula
 
     @property
-    def idTurma(self):
-        return self.__idTurma
+    def turma(self):
+        return self.__turma
 
     @property
-    def idProfessor(self):
-        return self.__idProfessor
+    def professorResponsavel(self):
+        return self.__professorResponsavel
 
     @property
-    def idMateria(self):
-        return self.__idMateia
+    def professorPresente(self):
+        return self.__professorPresente
+
+    @property
+    def materia(self):
+        return self.__mateia
 
     @property
     def numeroAula(self):
@@ -41,17 +46,17 @@ class Aula:
     def status(self):
         return self.__status
 
-    @idTurma.setter
+    @turma.setter
     def setIdturma(self, idTurma):
         self.idTurma = idTurma
 
-    @idProfessor.setter
-    def setIdProfessor(self, idProfessor):
-        self.__idProfessor = idProfessor
+    @professorPresente.setter
+    def setIdProfessor(self, professor):
+        self.__professorPresente = professor
 
-    @idMateria.setter
-    def setIdMateria(self, idMateria):
-        self.__idMateia = idMateria
+    @materia.setter
+    def setIdMateria(self, materia):
+        self.__mateia = materia
 
     @numeroAula.setter
     def setNumeroAula(self, numeroAula):
@@ -64,12 +69,3 @@ class Aula:
     @status.setter
     def setStatus(self, status):
         self.__status = status
-
-
-
-
-
-
-
-
-
