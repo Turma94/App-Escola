@@ -3,6 +3,7 @@ from views.viewLogin import ViewLogin
 from views.viewHome import ViewHome
 from views.elements.optionsMenuHide import OptionsMenuHide
 from views.painels.painelProfessor import PainelProfessor
+from views.painels.painelAulas import PainelAula
 
 def main(page:Page):
 
@@ -21,7 +22,10 @@ def main(page:Page):
     optionsMenu = OptionsMenuHide()
 
     #Painel Professor
-    painelProf=PainelProfessor()
+    painelProf = PainelProfessor()
+
+    #Painel Aula
+    painelAula = PainelAula()
 
 
 
@@ -46,7 +50,8 @@ def main(page:Page):
                     route="/home",
                     controls=[
                         barHome,
-                        painelProf
+                        #painelProf
+                        painelAula
 
                     ], drawer=optionsMenu
                 )
