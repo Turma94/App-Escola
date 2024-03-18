@@ -25,7 +25,7 @@ def main(page:Page):
     painelProf = PainelProfessor()
 
     #Painel Aula
-    painelAula = PainelAula()
+    painelAula = PainelAula(page)
 
 
 
