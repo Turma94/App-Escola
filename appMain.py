@@ -7,9 +7,6 @@ from views.painels.painelAulas import PainelAula
 
 def main(page:Page):
 
-
-
-
     def openMenuHide(e):
         optionsMenu.open=True
         page.update()

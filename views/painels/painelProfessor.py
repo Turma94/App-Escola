@@ -11,7 +11,7 @@ class NewProfessor(UserControl):
     def build(self):
         self.display_prof = Checkbox(value=False, label=f"{self.name} | "
                                                           f"{self.sobrenome} | "
-                                                      f"{self.contrato}")
+                                                      f"{self.contrato} ")
         self.edit_name = TextField(label="Nome")
         self.edit_sobrenome = TextField(label="Sobrenome", )
         self.edit_drop_contrato = Dropdown(
@@ -110,7 +110,12 @@ class PainelProfessor(UserControl):
         )
 
         self.list_prof = Column(alignment=MainAxisAlignment.CENTER)
+<<<<<<< Updated upstream
         # application's root control (i.e. "view") containing all other controls
+=======
+
+        # A tela que será retornada
+>>>>>>> Stashed changes
         return Column(
 
             controls=[
