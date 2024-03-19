@@ -18,6 +18,7 @@ class PainelAula(UserControl):
         self.quantidadeDias=TextField(label="Dias à lançar")
 
         self.tabelaAula=DataTable(
+            show_checkbox_column=True,
             columns=[
                 DataColumn(Text("Seg")),
                 DataColumn(Text("Ter")),
@@ -26,6 +27,20 @@ class PainelAula(UserControl):
                 DataColumn(Text("Sex")),
                 DataColumn(Text("Sab")),
             ],
+            rows=[
+                DataRow(cells=[
+                    DataCell(
+                        Row(controls=[Text("Aula"),IconButton(icon=icons.ADD)])
+                    ),
+                    DataCell(IconButton(icon=icons.ADD)),
+                    DataCell(IconButton(icon=icons.ADD)),
+                    DataCell(IconButton(icon=icons.ADD)),
+                    DataCell(IconButton(icon=icons.ADD)),
+                    DataCell(IconButton(icon=icons.ADD)),
+
+                ])
+
+            ]
 
         )
 

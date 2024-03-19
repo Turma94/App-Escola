@@ -110,12 +110,12 @@ class PainelProfessor(UserControl):
         )
 
         self.list_prof = Column(alignment=MainAxisAlignment.CENTER)
-<<<<<<< Updated upstream
+
         # application's root control (i.e. "view") containing all other controls
-=======
+
 
         # A tela que será retornada
->>>>>>> Stashed changes
+
         return Column(
 
             controls=[
