@@ -104,6 +104,7 @@ class NewAula(Container):
         self.t_drop_prof_eventual=Dropdown(
             width=100)
 
+
         # Drop das materias
         self.t_drop_materia=Dropdown(
         width=100)
@@ -118,6 +119,8 @@ class NewAula(Container):
             self.t_drop_materia.options.append(dropdown.Option(materia[1]))
 
 
+    def carregarDropProfessor(self):
+        pass
 
 
 
