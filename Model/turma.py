@@ -53,7 +53,7 @@ class Turma:
 
     def verAulas(self):
         for aula in self.__aulas:
-            print(f"{aula.idAula} | {aula.idProfessor} | {aula.idMateria} | {aula.numeroAula} | {aula.data} | {aula.status}")
+            print(f"{aula.aula} | {aula.professor} | {aula.materia} | {aula.numeroAula} | {aula.data} | {aula.status}")
 
 
 
