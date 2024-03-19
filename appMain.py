@@ -61,9 +61,6 @@ def main(page:Page):
     page.go(page.route)
 
 
-
-
-
 if __name__ == '__main__':
     app(target=main,assets_dir="assets")
 
