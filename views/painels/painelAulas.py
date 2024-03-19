@@ -1,13 +1,15 @@
 from flet import *
 from turmaDao import selectTurma
 from datetime import datetime
+from materiaDAO import listarMaterias
+
 
 class PainelAula(UserControl):
 
     def __init__(self,page):
         super().__init__()
         self.page=page
-        self.text_data_inicio=Text(value="Data Inicial")
+        self.text_data_inicio=Text(value="Escolher dia")
 
         self.data_inicial = DatePicker(
             on_change=self.modificarDataInicial,
@@ -15,34 +17,9 @@ class PainelAula(UserControl):
             last_date=datetime(2050, 10, 1),
         )
 
-        self.quantidadeDias=TextField(label="Dias à lançar")
 
-        self.tabelaAula=DataTable(
-            show_checkbox_column=True,
-            columns=[
-                DataColumn(Text("Seg")),
-                DataColumn(Text("Ter")),
-                DataColumn(Text("Qua")),
-                DataColumn(Text("Qui")),
-                DataColumn(Text("Sex")),
-                DataColumn(Text("Sab")),
-            ],
-            rows=[
-                DataRow(cells=[
-                    DataCell(
-                        Row(controls=[Text("Aula"),IconButton(icon=icons.ADD)])
-                    ),
-                    DataCell(IconButton(icon=icons.ADD)),
-                    DataCell(IconButton(icon=icons.ADD)),
-                    DataCell(IconButton(icon=icons.ADD)),
-                    DataCell(IconButton(icon=icons.ADD)),
-                    DataCell(IconButton(icon=icons.ADD)),
 
-                ])
 
-            ]
-
-        )
 
 
     def modificarDataInicial(self,e):
@@ -74,7 +51,7 @@ class PainelAula(UserControl):
         linhaDataInicio=Row(controls=[IconButton(icon=icons.CALENDAR_TODAY, on_click= lambda
                   e: self.data_inicial.pick_date()), self.text_data_inicio])
 
-        linhaDiasLancar = Row(controls=[self.quantidadeDias])
+
 
         return Column(controls=[
             Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
@@ -83,12 +60,12 @@ class PainelAula(UserControl):
                 Row(controls=[
                     self.drop_turma,
                     linhaDataInicio,
-                    linhaDiasLancar
+
 
                              ]),
                 FloatingActionButton(icon=icons.CHECK, on_click=self.add_clicked)], alignment=MainAxisAlignment.CENTER),
             Divider(thickness=2),
-            self.tabelaAula,
+
             self.list_aulas
         ])
 
@@ -103,7 +80,7 @@ class PainelAula(UserControl):
 
                 Divider(thickness=2),
             #     Vou colocar uma tab aqui para mostrar as semanas
-
+                NewAula()
 
             ]))
 
@@ -117,48 +94,29 @@ class PainelAula(UserControl):
 
 
 
+# Estamos alterando para que a tela so cadastre um dia por vez para cada turma
+class NewAula(Container):
 
-class NewAula(UserControl):
-
-    def __init__(self, periodo, turma, tipo):
+    def __init__(self, prof_efetivo=None, prof_eventual=None):
         super().__init__()
-        self.periodo = periodo
-        self.turma = turma
-        self.tipo = tipo
+        self.prof_efetivo=prof_efetivo
+        # Drop dos professores
+        self.t_drop_prof_eventual=Dropdown(
+            width=100)
+
+        # Drop das materias
+        self.t_drop_materia=Dropdown(
+        width=100)
+        self.carragarDropMaterias()
 
 
-    def build(self):
-        self.display_aula = Checkbox(value=False, label=f"{self.periodo} | {self.turma} | {self.tipo}")
+        # Add os elementos no container para aparecer na tela
+        self.content=self.t_drop_materia
 
-        self.edit_periodo = Dropdown(label="Período",
-                                     options=[
-                                       dropdown.Option("Manhã"),
-                                       dropdown.Option("Tarde"),
-                                       dropdown.Option("Noite")
-                                     ])
+    def carragarDropMaterias(self):
+        for materia in listarMaterias():
+            self.t_drop_materia.options.append(dropdown.Option(materia[1]))
 
-        self.edit_turma = Dropdown(label="Turma",
-                                   options=[
-                                       dropdown.Option("1-A"),
-                                       dropdown.Option("1-B"),
-                                       dropdown.Option("2-A"),
-                                       dropdown.Option("2-B")
-                                   ])
-
-        self.tipo = Dropdown(label="Tipo",
-                                   options=[
-                                       dropdown.Option("Semana"),
-                                       dropdown.Option("Mês"),
-                                       dropdown.Option("Semestre")
-                                   ])
-
-
-        self.display_view = Row(controls=[
-            self.display_aula
-        ])
-
-
-        return Column(controls=[self.display_aula])
 
 
 
