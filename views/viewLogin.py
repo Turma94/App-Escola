@@ -1,5 +1,5 @@
 from flet import *
-from utils.testarEntradasUsuario import *
+
 
 class ViewLogin(UserControl):
 
@@ -14,11 +14,8 @@ class ViewLogin(UserControl):
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
         }, color="#ffffff", padding=20))
 
-    def validarLogin(self):
-          if testarSenha(self.t_fild_login.value):
-             return self.t_fild_login.value
-          else:
-             self.t_fild_login.error_text="Você precisa digitar o seu login!"
+
+
 
 
 
