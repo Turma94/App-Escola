@@ -2,32 +2,32 @@ from Model.materia import Materia
 from Model.turma import Turma
 
 class Aula:
-    def __init__(self, idAula, idTurma:Turma, idProfessor, idMateia:Materia, numeroAula, data, status=False):
+    def __init__(self, aula, turma:Turma, professor, mateia:Materia, numeroAula, data, status=False):
 
-        self.__idAula = idAula
-        self.__idTurma = idTurma
-        self.__idProfessor = idProfessor
-        self.__idMateia = idMateia
+        self.__aula = aula
+        self.__turma = turma
+        self.__professor = professor
+        self.__mateia = mateia
         self.__numeroAula = numeroAula
         self.__data = data
         self.__status = status
 
 
     @property
-    def idAula(self):
-        return self.__idAula
+    def aula(self):
+        return self.__aula
 
     @property
-    def idTurma(self):
-        return self.__idTurma
+    def turma(self):
+        return self.__turma
 
     @property
-    def idProfessor(self):
-        return self.__idProfessor
+    def professor(self):
+        return self.__professor
 
     @property
-    def idMateria(self):
-        return self.__idMateia
+    def materia(self):
+        return self.__mateia
 
     @property
     def numeroAula(self):
@@ -41,17 +41,17 @@ class Aula:
     def status(self):
         return self.__status
 
-    @idTurma.setter
-    def setIdturma(self, idTurma):
-        self.idTurma = idTurma
+    @turma.setter
+    def setturma(self, turma):
+        self.turma = turma
 
-    @idProfessor.setter
-    def setIdProfessor(self, idProfessor):
-        self.__idProfessor = idProfessor
+    @professor.setter
+    def setprofessor(self, professor):
+        self.__professor = professor
 
-    @idMateria.setter
-    def setIdMateria(self, idMateria):
-        self.__idMateia = idMateria
+    @materia.setter
+    def setmateria(self, materia):
+        self.__mateia = materia
 
     @numeroAula.setter
     def setNumeroAula(self, numeroAula):
