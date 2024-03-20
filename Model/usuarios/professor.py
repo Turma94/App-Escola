@@ -4,8 +4,8 @@ from Model.aula import Aula
 from Model.turma import Turma
 
 class Professor(User):
-    def __init__(self, id:int, nome: str, senha: str, nivel: str, contrato: str):
-        super().__init__(id, nome, senha, nivel)
+    def __init__(self, id:int, nome: str, senha: str, email:str, nivel: str, contrato: str):
+        super().__init__(id, nome, senha, email, nivel)
         self.__contrato = contrato
         self.__materias = []
         self.__aulas = []
@@ -53,7 +53,7 @@ class Professor(User):
 
     def verAulas(self):
         for aula in self.__aulas:
-            print(f"`{aula.idTurma} {aula.idMateria} {aula.numeroAula} {aula.data}")
+            print(f"`{aula.ID_aula} {aula.materia} {aula.numeroAula} {aula.data}")
 
     def addAula(self, entradaAula:Aula):
 
@@ -82,24 +82,26 @@ class Professor(User):
 
 
 
+    def diaAtual(self):
+        pass
+
+
+
 if __name__ == '__main__':
 
     materia1 = Materia("1", "Português")
-    professor1 = Professor("1", "Carlos Silva", "1223", "COMUM", "CLT")
+    professor1 = Professor("1", "Carlos Silva", "1223","carlos@gmail.com", "COMUM", "CLT")
+    professor2 = Professor("2", "Cristino Ronaldo", "1223", "cri@gmail.com","COMUM", "CLT")
     t_4a = Turma("1", "4", "A", "2024", "MANHÃ")
 
     ############################################################
-    aula1 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "20/03/2024")
-    aula2 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "20/03/2025")
-    aula3 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "23/01/2025")
-    aula4 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "20/06/2020")
-    aula5 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "3", "20/03/2024")
-    aula6 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "19/11/2019")
-    aula7 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "7", "20/12/2022")
-    aula8 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "6", "03/01/2021")
+    aula1 = Aula(ID_aula="1", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
+    aula2 = Aula(ID_aula="2", turma=t_4a.serie, professorResponsavel=professor2.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
+    aula3 = Aula(ID_aula="3", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/04/2024")
+    aula4 = Aula(ID_aula="4", turma=t_4a.serie, professorResponsavel=professor2.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="22/03/2024")
+    aula5 = Aula(ID_aula="5", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="3", data="20/03/2024")
+    aula6 = Aula(ID_aula="6", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="4", data="20/03/2024")
 
-    aula9 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "3", "20/03/2024")
-    aula10 = Aula("1", t_4a.serie, professor1.nome, materia1.nome, "2", "20/03/2024")
     ###############################################
 
     professor1.addAula(aula1)
@@ -108,9 +110,7 @@ if __name__ == '__main__':
     professor1.addAula(aula4)
     professor1.addAula(aula5)
     professor1.addAula(aula6)
-    professor1.addAula(aula7)
-    professor1.addAula(aula8)
-    professor1.addAula(aula9)
-    professor1.addAula(aula10)
 
     professor1.verAulas()
+
+

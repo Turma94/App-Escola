@@ -53,7 +53,7 @@ class Turma:
 
     def verAulas(self):
         for aula in self.__aulas:
-            print(f"{aula.aula} | {aula.professor} | {aula.materia} | {aula.numeroAula} | {aula.data} | {aula.status}")
+            print(f"{aula.ID_aula} | {aula.professorPresente} | {aula.materia} | {aula.numeroAula} | {aula.data} | {aula.status}")
 
 
 
@@ -63,15 +63,15 @@ if __name__ == '__main__':
 
     turma = Turma(5, "5", "C", "2024", "MANHA")
 
-    aula1 = Aula(1, "1-A", "Ze", "Matematica", "2", "10/06/2019")
-    aula2 = Aula(1, "1-A", "Ze", "Matematica", "3", "10/06/2019")
-    aula3 = Aula(1, "1-A", "Ze", "Matematica", "2", "11/06/2019")
-    aula4 = Aula(1, "1-A", "Ze", "Matematica", "3", "10/04/2019")
-    aula5 = Aula(1, "1-A", "Ze", "Matematica", "2", "10/06/2019")
-    aula6 = Aula(1, "1-A", "Ze", "Matematica", "3", "10/06/2019")
-    aula7 = Aula(1, "1-A", "Ze", "Matematica", "5", "12/06/2020")
-    aula8 = Aula(1, "1-A", "Ze", "Matematica", "7", "11/01/2019")
-    aula9 = Aula(1, "1-A", "Ze", "Matematica", "5", "12/06/2020")
+    aula1 = Aula(1, "1-A", "Ze","carlos", "Matematica", "2", "10/06/2019")
+    aula2 = Aula(1, "1-A", "Ze","carlos", "Matematica", "3", "10/06/2019")
+    aula3 = Aula(1, "1-A", "Ze", "carlos","Matematica", "2", "11/06/2019")
+    aula4 = Aula(1, "1-A", "Ze", "carlos","Matematica", "3", "10/04/2019")
+    aula5 = Aula(1, "1-A", "Ze","carlos", "Matematica", "2", "10/06/2019")
+    aula6 = Aula(1, "1-A", "Ze", "carlos","Matematica", "3", "10/06/2019")
+    aula7 = Aula(1, "1-A", "Ze", "carlos","Matematica", "5", "12/06/2020")
+    aula8 = Aula(1, "1-A", "Ze", "carlos","Matematica", "7", "11/01/2019")
+    aula9 = Aula(1, "1-A", "Ze", "carlos","Matematica", "5", "12/06/2020")
 
 
     turma.addAula(aula1)
