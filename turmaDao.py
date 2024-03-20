@@ -2,6 +2,7 @@ import sqlite3 as sq
 
 def connect():
     conn=sq.connect(r"bancoTeste.db")
+    conn.execute("PRAGMA foreign_keys = 1")
     cursor=conn.cursor()
     return conn, cursor
 
