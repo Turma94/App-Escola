@@ -1,5 +1,5 @@
 from bdTeste import usuarios
-
+#teste
 def validarLogin(email):
     has_email = False
     for usuario in usuarios:

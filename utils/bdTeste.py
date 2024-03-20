@@ -1,4 +1,5 @@
 from Model.usuarios.secretaria import Secretaria
+#teste
 
 s1 = Secretaria("1", "carla", "12345678", "carla@email.com", "COMUM")
 s2 = Secretaria("2", "ze", "qwertyui", "ze@email.com", "COMUM")

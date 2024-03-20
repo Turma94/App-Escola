@@ -1,5 +1,6 @@
 from hashlib import sha256
 from bdTeste import usuarios
+#teste
 def criptografarSenha(senha):
     senha = sha256(senha.encode())
     return senha.hexdigest()
