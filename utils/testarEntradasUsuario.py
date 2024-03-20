@@ -1,31 +1,8 @@
 import re
-# from utils.criptografia import criptografarSenha
-def testarSenha(senha:str)-> bool:
+from utils.criptografia import *
+from Model.usuarios.usuario import *
 
-    regex_senha = r'^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?!.*\s).{8,}$'
-
-        # Verifica se a senha tem 8 caracteres
-    if len(senha) == 8:
-
-        #verificaSenha(senha)
-        return True
-        # else:
-        #     return False
-
-    else:
-
-        return False
-
-def validar_login(login):
-
-    # Verifica se o login contém apenas letras, números e underscores
-
-    if re.match(r"^\w+$", login):
-        return True
-
-    else:
-        return False
-
+############## Login ##############
 
 def validar_email(email):
 
@@ -39,6 +16,9 @@ def validar_email(email):
     else:
         return False
 
+
+############## Senha ##############
+
 def criarSenha(senha:str)-> bool:
 
     regex_senha = r'^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?!.*\s).{8,}$'
@@ -46,4 +26,16 @@ def criarSenha(senha:str)-> bool:
     if re.match(regex_senha, senha):
         return True
     else:
+        return False
+
+    
+def testarSenha(senha:str)-> bool:
+
+    # Verifica se a senha tem 8 caracteres
+    if len(senha) == 8:
+
+        return verificaSenha(senha)
+
+    else:
+
         return False

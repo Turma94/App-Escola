@@ -4,7 +4,7 @@ def criptografarSenha(senha):
     senha = sha256(senha.encode())
     return senha.hexdigest()
 
-senhaBanco = ["123456789", "1234567", "12345678"]
+senhaBanco = ["12345678", "01234567", "1234567a"]
 senhaBanco[0] = sha256(senhaBanco[0].encode())
 senhaBanco[1] = sha256(senhaBanco[1].encode())
 senhaBanco[2] = sha256(senhaBanco[2].encode())
