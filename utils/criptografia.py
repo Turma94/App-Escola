@@ -1,22 +1,17 @@
 from hashlib import sha256
-
+from bdTeste import usuarios
 def criptografarSenha(senha):
     senha = sha256(senha.encode())
     return senha.hexdigest()
-
-senhaBanco = ["123456789", "1234567", "12345678"]
-senhaBanco[0] = sha256(senhaBanco[0].encode())
-senhaBanco[1] = sha256(senhaBanco[1].encode())
-senhaBanco[2] = sha256(senhaBanco[2].encode())
-###############################
 
 def verificaSenha(senha):
 
     senha = sha256(senha.encode())
 
     hasSenha = False
-    for BDSenhas in senhaBanco:
-        if BDSenhas.hexdigest() == senha.hexdigest():
+    for usurio in usuarios:
+        has_senha = sha256(usurio.senha.encode())
+        if has_senha.hexdigest() == senha.hexdigest():
             hasSenha = True
 
     if hasSenha == True:
@@ -25,5 +20,3 @@ def verificaSenha(senha):
     else:
         print("Senha invalida")
         return False
-
-verificaSenha("1234567")
