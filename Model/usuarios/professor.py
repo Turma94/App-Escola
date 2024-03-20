@@ -4,8 +4,8 @@ from Model.aula import Aula
 from Model.turma import Turma
 
 class Professor(User):
-    def __init__(self, id:int, nome: str, senha: str, nivel: str, contrato: str):
-        super().__init__(id, nome, senha, nivel)
+    def __init__(self, id:int, nome: str, senha: str, email:str, nivel: str, contrato: str):
+        super().__init__(id, nome, senha, email, nivel)
         self.__contrato = contrato
         self.__materias = []
         self.__aulas = []
@@ -90,8 +90,8 @@ class Professor(User):
 if __name__ == '__main__':
 
     materia1 = Materia("1", "Português")
-    professor1 = Professor("1", "Carlos Silva", "1223", "COMUM", "CLT")
-    professor2 = Professor("2", "Cristino Ronaldo", "1223", "COMUM", "CLT")
+    professor1 = Professor("1", "Carlos Silva", "1223","carlos@gmail.com", "COMUM", "CLT")
+    professor2 = Professor("2", "Cristino Ronaldo", "1223", "cri@gmail.com","COMUM", "CLT")
     t_4a = Turma("1", "4", "A", "2024", "MANHÃ")
 
     ############################################################

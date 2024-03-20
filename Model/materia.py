@@ -19,5 +19,3 @@ class Materia:
 
     def addProfessor(self, professor):
         self.__professores.append(professor)
-
-#Teste 3
