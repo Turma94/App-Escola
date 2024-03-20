@@ -46,16 +46,21 @@ class Aula:
     def status(self):
         return self.__status
 
+
     @turma.setter
-    def setIdturma(self, idTurma):
-        self.idTurma = idTurma
+    def setTurma(self, turma):
+        self.turma = turma
+
+    @professorResponsavel.setter
+    def setProfessorResponsavel(self, professor):
+        self.__professor = professor
 
     @professorPresente.setter
-    def setIdProfessor(self, professor):
-        self.__professorPresente = professor
+    def setProfessorPresente(self, professor):
+        self.professorPresente = professor
 
     @materia.setter
-    def setIdMateria(self, materia):
+    def setmateria(self, materia):
         self.__mateia = materia
 
     @numeroAula.setter
