@@ -29,7 +29,7 @@ def main(page:Page):
     def entrarSistema(e):
 
         if validar_email(telaLogin.t_fild_login.value):
-            telaLogin.t_fild_login.error_text = ""
+            telaLogin.t_fild_login.error_text = " "
             telaLogin.t_fild_login.update()
 
             if testarSenha(telaLogin.t_fild_passWord.value):
@@ -43,7 +43,7 @@ def main(page:Page):
                 telaLogin.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
                 telaLogin.t_fild_passWord.update()
         else:
-            telaLogin.t_fild_login.error_text = "Digite uma senha com caracteres permitidos"
+            telaLogin.t_fild_login.error_text = "Este não é uma E-mail valido"
             telaLogin.t_fild_login.update()
 
 
