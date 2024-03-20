@@ -30,13 +30,13 @@ class TestValidarEmail(unittest.TestCase):
         # Testa com e-mails válidos
         for _ in range(100):
             email = self.fake.email()
-            print("Valido ",email)
+            print("E-mail Valido",email)
             self.assertTrue(validar_email(email))
 
     def test_email_invalido(self):
         # Testa com e-mails inválidos
         for _ in range(100):
-            primeiroTermo=random.choice([self.fake.word(),"@",".",self.fake.word(),".com"])
+            primeiroTermo = random.choice([self.fake.word(),"@",".",self.fake.word(),".com"])
             segundoTermo = random.choice([self.fake.word(),"@",".",self.fake.word(),".com"])
             terceitoTermo = random.choice([self.fake.word(),"@",".",self.fake.word(),".com"])
             combincao = f"{primeiroTermo}{segundoTermo}{terceitoTermo}"
