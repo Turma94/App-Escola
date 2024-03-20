@@ -1,10 +1,11 @@
 from abc import ABC
 class User(ABC):
-    def __init__(self, id: int, nome: str, senha: str, nivel: str):
+    def __init__(self, id: int, nome: str, senha: str, email, nivel: str):
 
         self.__id = id
         self.__nome = nome
         self.__senha = senha
+        self.__email = email
         self.__nivel = nivel
 
 
@@ -21,6 +22,10 @@ class User(ABC):
         return self.__senha
 
     @property
+    def email(self):
+        return self.__email
+
+    @property
     def nivel(self):
         return self.__nivel
 
@@ -33,4 +38,6 @@ class User(ABC):
     def setSenha(self, senha):
         self.__senha = senha
 
-
+    @email.setter
+    def setEmail(self, email):
+        self.__email = email

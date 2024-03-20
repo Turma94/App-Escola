@@ -2,11 +2,12 @@ from Model.materia import Materia
 from Model.turma import Turma
 
 class Aula:
-    def __init__(self, aula, turma:Turma, professor, mateia:Materia, numeroAula, data, status=False):
+    def __init__(self, ID_aula, turma:Turma, professorResponsavel, professorPresente, mateia:Materia, numeroAula, data, status=False):
 
-        self.__aula = aula
+        self.__ID_aula = ID_aula
         self.__turma = turma
-        self.__professor = professor
+        self.__professorResponsavel = professorResponsavel
+        self.__professorPresente = professorPresente
         self.__mateia = mateia
         self.__numeroAula = numeroAula
         self.__data = data
@@ -14,16 +15,20 @@ class Aula:
 
 
     @property
-    def aula(self):
-        return self.__aula
+    def ID_aula(self):
+        return self.__ID_aula
 
     @property
     def turma(self):
         return self.__turma
 
     @property
-    def professor(self):
-        return self.__professor
+    def professorResponsavel(self):
+        return self.__professorResponsavel
+
+    @property
+    def professorPresente(self):
+        return self.__professorPresente
 
     @property
     def materia(self):
@@ -41,13 +46,18 @@ class Aula:
     def status(self):
         return self.__status
 
+
     @turma.setter
-    def setturma(self, turma):
+    def setTurma(self, turma):
         self.turma = turma
 
-    @professor.setter
-    def setprofessor(self, professor):
+    @professorResponsavel.setter
+    def setProfessorResponsavel(self, professor):
         self.__professor = professor
+
+    @professorPresente.setter
+    def setProfessorPresente(self, professor):
+        self.professorPresente = professor
 
     @materia.setter
     def setmateria(self, materia):
@@ -64,12 +74,3 @@ class Aula:
     @status.setter
     def setStatus(self, status):
         self.__status = status
-
-
-
-
-
-
-
-
-

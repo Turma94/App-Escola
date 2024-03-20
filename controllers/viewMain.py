@@ -4,6 +4,7 @@ from Model.turma import Turma
 from Model.aula import Aula
 from utils.descobrindo_dia_semana import validar_data
 from datetime import date
+from utils.testarEntradasUsuario import *
 
 # Materias
 # materia1=Materia("1", "Português")
