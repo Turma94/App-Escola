@@ -5,7 +5,8 @@ from views.elements.optionsMenuHide import OptionsMenuHide
 from views.painels.painelProfessor import PainelProfessor
 from views.painels.painelAulas import PainelAula
 from utils.testarEntradasUsuario import *
-
+from usuarioDAO import listarUsuario
+from utils.criptografia import criptografarSenha
 def main(page:Page):
 
     def openMenuHide(e):
@@ -25,25 +26,32 @@ def main(page:Page):
     #Painel Aula
     painelAula = PainelAula(page)
 
-    # Depois tirar essa função e colocar na controller
+    # Depois tirar essa função e colocar na controller 
     def entrarSistema(e):
 
         if validar_email(telaLogin.t_fild_login.value):
-            telaLogin.t_fild_login.error_text = " "
-            telaLogin.t_fild_login.update()
+            for usuario in listarUsuario():
 
-            if testarSenha(telaLogin.t_fild_passWord.value):
-                telaLogin.t_fild_passWord.error_text = ""
-                telaLogin.t_fild_passWord.update()
+                if usuario[4]==telaLogin.t_fild_login.value:
+                    telaLogin.t_fild_login.error_text = ""
+                    telaLogin.t_fild_login.update()
 
-                # Verificar no banco de dados se o nome e a senha estão la
+                    if testarSenha(telaLogin.t_fild_passWord.value):
+                        senhaCript=criptografarSenha(telaLogin.t_fild_passWord.value)
+                        telaLogin.t_fild_passWord.error_text = ""
+                        telaLogin.t_fild_passWord.update()
+                        if senhaCript==usuario[3]:
 
-                page.go("/home")
-            else:
-                telaLogin.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
-                telaLogin.t_fild_passWord.update()
+
+                            page.go("/home")
+                        else:
+                            telaLogin.t_fild_passWord.error_text = "Sua senha não esta cadastrada"
+                            telaLogin.t_fild_passWord.update()
+                    else:
+                        telaLogin.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
+                        telaLogin.t_fild_passWord.update()
         else:
-            telaLogin.t_fild_login.error_text = "Este não é uma E-mail valido"
+            telaLogin.t_fild_login.error_text = "Este não é uma E-mail não valido"
             telaLogin.t_fild_login.update()
 
 
