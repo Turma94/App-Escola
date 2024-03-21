@@ -49,6 +49,7 @@ def listarUsuario():
 
 
 if __name__ == '__main__':
+    pass
     # addUsuario("Carlos","Silva",
     #            "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     #            "sobralcomix@gmail.com","COMUM")
@@ -58,6 +59,6 @@ if __name__ == '__main__':
     #            "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     #            "maria@gmail.com","COMUM")
     #
-    addUsuario("IAN","Silva",
-               "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-               "ian@gmail.com","COMUM")
+    # addUsuario("IAN","Silva",
+    #            "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    #            "ian@gmail.com","COMUM")
