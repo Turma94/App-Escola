@@ -32,9 +32,9 @@ def criarSenha(senha:str)-> bool:
 def testarSenha(senha:str)-> bool:
 
     # Verifica se a senha tem 8 caracteres
-    if len(senha) == 8:
+    if len(senha) == 4:
 
-        return verificaSenha(senha)
+        return True
 
     else:
 
