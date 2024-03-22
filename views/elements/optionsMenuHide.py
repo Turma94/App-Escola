@@ -10,6 +10,11 @@ class OptionsMenuHide(NavigationDrawer):
                 icon=icons.HOME,
                 selected_icon_content=Icon(icons.HOME_OUTLINED),
             )
+        self.btnUsuario = NavigationDrawerDestination(
+                label="Usuário",
+                icon=icons.VERIFIED_USER_SHARP,
+                selected_icon_content=Icon(icons.VERIFIED_USER),
+            )
         self.btnProfessores = NavigationDrawerDestination(
                 label="Professores",
                 icon=icons.PERSON_ADD_ALT_SHARP,
@@ -38,6 +43,8 @@ class OptionsMenuHide(NavigationDrawer):
 
         self.controls = [
             self.btnHome,
+            Divider(thickness=2),
+            self.btnUsuario,
             Divider(thickness=2),
             self.btnProfessores,
             Divider(thickness=2),

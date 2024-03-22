@@ -1,7 +1,7 @@
 import sqlite3 as sq
 
 def connect():
-    conn=sq.connect(r"bancoTeste.db")
+    conn=sq.connect("bancoTeste.db")
     conn.execute("PRAGMA foreign_keys = 1")
     cursor=conn.cursor()
     return conn, cursor
@@ -11,16 +11,14 @@ def criarTabelaAula():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS AULA(
     idAula INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    id_turma INTEGER NOT NULL,
-    id_professor_responsavel INTEGER NOT NULL,
-    id_professor_presente INTEGER NOT NULL,
-    id_materia INTEGER NOT NULL,
+    id_turma INTEGER,
+    id_professor_responsavel INTEGER,
+    id_professor_presente INTEGER,
+    id_materia INTEGER,
     data VARCHAR(10),
     status BOOLEAN,
-    FOREIGN KEY (id_turma) REFERENCES TURMA (id),
-    FOREIGN KEY (id_professor_responsavel) REFERENCES PROFESSOR (idProfesor),
-    FOREIGN KEY (id_professor_presente) REFERENCES PROFESSOR (idProfesor),
-    FOREIGN KEY (id_materia) REFERENCES MATERIA (idMateria)
+    FOREIGN KEY (id_turma) REFERENCES TURMA (id)
+    
     );
     """)
     conn.commit()
@@ -28,7 +26,7 @@ def criarTabelaAula():
     conn.close()
 
 
-def inserirAula(id_turma:int,id_professor_responsavel:int,id_professor_presente:int,id_materia:int,
+def inserirAula(id_turma,id_professor_responsavel:int,id_professor_presente:int,id_materia:int,
                 data:str,status:bool):
     criarTabelaAula()
     conn, cursor = connect()

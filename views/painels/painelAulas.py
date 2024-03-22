@@ -18,10 +18,6 @@ class PainelAula(UserControl):
         )
 
 
-
-
-
-
     def modificarDataInicial(self,e):
         self.text_data_inicio.value=(f"{self.data_inicial.value.day}/{self.data_inicial.value.month}/"
                                     f"{self.data_inicial.value.year}")
@@ -68,7 +64,6 @@ class PainelAula(UserControl):
 
             self.list_aulas
         ])
-
 
 
 

@@ -1,4 +1,5 @@
 import sqlite3 as sq
+from utils.criptografia import criptografarSenha
 
 def connect():
     conn=sq.connect(r"bancoTeste.db")
@@ -62,6 +63,12 @@ if __name__ == '__main__':
     # addUsuario("IAN","Silva",
     #            "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     #            "ian@gmail.com","COMUM")
+
+    senhaGerada=criptografarSenha(input("digite uma senha: "))
+
+    addUsuario("José","Rocha",
+               senhaGerada,
+               "ian@gmail.com","COMUM")
 
     for i in listarUsuario():
         print(i)

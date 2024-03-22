@@ -17,7 +17,6 @@ def criarTabela():
      sigla_turma text not null
      );
     """)
-
      conn.commit()
      cursor.close()
      conn.close()
