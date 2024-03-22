@@ -27,6 +27,8 @@ def main(page:Page):
             painelUsuario.update()
         elif e.data=="2":
             print("Professores")
+            painelProf.visible=True
+
         elif e.data=="3":
             print("Materia")
             painelUsuario.visible = False
