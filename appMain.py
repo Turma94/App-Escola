@@ -35,12 +35,18 @@ def main(page:Page):
             painelMateria.offset=transform.Offset(0, 0)
             painelMateria.animate_offset=animation.Animation(500)
             painelMateria.update()
-        elif e.data=="4":
-            print("Aulas")
+        elif e.data == "4":
+            print("Turma")
         elif e.data=="5":
-            print("Relatorio")
+            print("Aulas")
         elif e.data=="6":
+            print("Relatorio")
+        elif e.data=="7":
             print("Fechar")
+
+    def cadastraUsuario(e):
+        pass
+
 
     # Views Login
     telaLogin = ViewLogin()
@@ -61,9 +67,16 @@ def main(page:Page):
 
     #Painel usuario
     painelUsuario=PainelUsuario()
+    painelUsuario.btn_cadastrar.on_click=cadastraUsuario
+
 
     #Painel Materia
     painelMateria=PainelMateria()
+
+    #Painel Turma
+
+
+
 
     # Depois tirar essa função e colocar na controller
     def entrarSistema(e):
@@ -92,6 +105,8 @@ def main(page:Page):
         else:
             telaLogin.t_fild_login.error_text = "Este não é uma E-mail não valido"
             telaLogin.t_fild_login.update()
+
+
 
 
     telaLogin.btn_enter.on_click=entrarSistema

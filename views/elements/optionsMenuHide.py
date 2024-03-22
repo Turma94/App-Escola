@@ -25,6 +25,11 @@ class OptionsMenuHide(NavigationDrawer):
                 icon=icons.ASSIGNMENT,
                 selected_icon_content=Icon(icons.ASSIGNMENT_OUTLINED),
             )
+        self.btnTurma = NavigationDrawerDestination(
+                label="Turma",
+                icon=icons.ASSIGNMENT,
+                selected_icon_content=Icon(icons.ASSIGNMENT_OUTLINED),
+            )
         self.btnAulas = NavigationDrawerDestination(
                 label="Aulas",
                 icon=icons.CALENDAR_TODAY,
@@ -49,6 +54,8 @@ class OptionsMenuHide(NavigationDrawer):
             self.btnProfessores,
             Divider(thickness=2),
             self.btnMateria,
+            Divider(thickness=2),
+            self.btnTurma,
             Divider(thickness=2),
             self.btnAulas,
             Divider(thickness=2),
