@@ -7,7 +7,7 @@ from views.painels.painelAulas import PainelAula
 from views.painels.painelUsuarios import PainelUsuario
 from views.painels.painelMateria import PainelMateria
 from utils.testarEntradasUsuario import *
-from usuarioDAO import listarUsuario
+from DAO.usuarioDAO import listarUsuario
 from utils.criptografia import criptografarSenha
 def main(page:Page):
 
@@ -19,6 +19,8 @@ def main(page:Page):
             print("Home")
         elif e.data=="1":
             print("Usuario")
+            painelProf.visible = False
+            painelProf.update()
             painelMateria.visible = False
             painelMateria.update()
             painelUsuario.visible=True
@@ -26,11 +28,18 @@ def main(page:Page):
             painelUsuario.animate_offset = animation.Animation(500)
             painelUsuario.update()
         elif e.data=="2":
+            painelMateria.visible = False
+            painelMateria.update()
+            painelUsuario.visible = False
+            painelUsuario.update()
             print("Professores")
             painelProf.visible=True
+            painelProf.update()
 
         elif e.data=="3":
             print("Materia")
+            painelProf.visible = False
+            painelProf.update()
             painelUsuario.visible = False
             painelUsuario.update()
             painelMateria.visible=True
@@ -132,7 +141,7 @@ def main(page:Page):
                     route="/home",
                     controls=[
                         barHome,
-                        # #painelProf
+                        painelProf,
                         # painelAula
                         painelUsuario,
                         painelMateria

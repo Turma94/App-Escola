@@ -14,3 +14,4 @@ reportlab
 flet
 holidays
 reportlaba
+mysql-connector-python
