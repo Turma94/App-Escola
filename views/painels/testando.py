@@ -1,6 +1,6 @@
 import flet as ft
 
-class Task(ft.UserControl):
+class Materia(ft.UserControl):
     def __init__(self, task_name, task_delete):
         super().__init__()
         self.task_name = task_name
@@ -90,7 +90,7 @@ class TodoApp(ft.UserControl):
         self.update()
 
     def add_clicked(self, e):
-        task = Task(self.new_task.value, self.task_delete)
+        task = Materia(self.new_task.value, self.task_delete)
         self.tasks.controls.append(task)
         self.new_task.value = ""
         self.update()

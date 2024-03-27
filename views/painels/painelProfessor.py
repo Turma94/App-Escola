@@ -118,6 +118,7 @@ class PainelProfessor(UserControl):
 
         return Column(
 
+
             controls=[
                 Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
                 Divider(thickness=2),

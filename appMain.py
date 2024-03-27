@@ -13,8 +13,6 @@ def main(page:Page):
 
     def fecharPaineis(args):
         for painel in args:
-            # painel.visible = False
-            # painel.update()
             painel.visible=False
             painel.update()
 
@@ -48,10 +46,17 @@ def main(page:Page):
             print("Turma")
         elif e.data=="5":
             print("Aulas")
+            fecharPaineis([painelMateria,painelProf,painelUsuario])
+            painelAula.visible=True
+            painelAula.update()
         elif e.data=="6":
             print("Relatorio")
         elif e.data=="7":
             print("Fechar")
+
+
+
+
 
 
 
@@ -73,9 +78,10 @@ def main(page:Page):
 
     #Painel Professor
     painelProf = PainelProfessor()
+    painelProf.visible=False
 
     #Painel Aula
-    painelAula = PainelAula(page)
+    painelAula = PainelAula()
 
     #Painel usuario
     painelUsuario=PainelUsuario()
@@ -84,6 +90,7 @@ def main(page:Page):
 
     #Painel Materia
     painelMateria=PainelMateria()
+    painelMateria.visible=False
 
     #Painel Turma
 
@@ -140,7 +147,7 @@ def main(page:Page):
                     controls=[
                         barHome,
                         painelProf,
-                        # painelAula
+                        painelAula,
                         painelUsuario,
                         painelMateria
 

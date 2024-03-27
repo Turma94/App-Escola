@@ -1,4 +1,4 @@
-import sqlite3 as sq
+
 from utils.criptografia import criptografarSenha
 import mysql.connector
 
