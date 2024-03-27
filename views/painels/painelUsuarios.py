@@ -42,7 +42,7 @@ class PainelUsuario(Container):
 
         ], alignment=MainAxisAlignment.SPACE_AROUND)
 
-        self.offset=transform.Offset(1, 0)
+        self.offset=transform.Offset(0, 0)
         self.animate_offset = animation.Animation(500)
         self.visible=False
 

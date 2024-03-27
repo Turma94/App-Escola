@@ -11,40 +11,38 @@ from DAO.usuarioDAO import listarUsuario
 from utils.criptografia import criptografarSenha
 def main(page:Page):
 
+    def fecharPaineis(args):
+        for painel in args:
+            # painel.visible = False
+            # painel.update()
+            painel.visible=False
+            painel.update()
+
     def openMenuHide(e):
         optionsMenu.open = True
         page.update()
+
+    #     Aqui modificamos os paineis
     def change_options_menu_left(e):
         if e.data=="0":
             print("Home")
         elif e.data=="1":
             print("Usuario")
-            painelProf.visible = False
-            painelProf.update()
-            painelMateria.visible = False
-            painelMateria.update()
+
+            fecharPaineis([painelProf,painelMateria])
+
             painelUsuario.visible=True
-            painelUsuario.offset = transform.Offset(0, 0)
-            painelUsuario.animate_offset = animation.Animation(500)
             painelUsuario.update()
         elif e.data=="2":
-            painelMateria.visible = False
-            painelMateria.update()
-            painelUsuario.visible = False
-            painelUsuario.update()
             print("Professores")
+            fecharPaineis([painelUsuario, painelMateria])
             painelProf.visible=True
             painelProf.update()
 
         elif e.data=="3":
             print("Materia")
-            painelProf.visible = False
-            painelProf.update()
-            painelUsuario.visible = False
-            painelUsuario.update()
+            fecharPaineis([painelUsuario, painelProf])
             painelMateria.visible=True
-            painelMateria.offset=transform.Offset(0, 0)
-            painelMateria.animate_offset=animation.Animation(500)
             painelMateria.update()
         elif e.data == "4":
             print("Turma")
@@ -55,6 +53,9 @@ def main(page:Page):
         elif e.data=="7":
             print("Fechar")
 
+
+
+    # Funções para cadastrar
     def cadastraUsuario(e):
         pass
 
@@ -65,7 +66,7 @@ def main(page:Page):
     barHome = ViewHome()
     barHome.btn_menu_hide.on_click = openMenuHide
 
-    # Botões escondidos
+    # Botões de Acesso aos paineis
     optionsMenu = OptionsMenuHide()
     optionsMenu.on_change=change_options_menu_left
 
@@ -89,7 +90,7 @@ def main(page:Page):
 
 
 
-    # Depois tirar essa função e colocar na controller
+    # Função valida as entradas para entrar no sistema
     def entrarSistema(e):
 
         if validar_email(telaLogin.t_fild_login.value):
@@ -105,8 +106,8 @@ def main(page:Page):
                         telaLogin.t_fild_passWord.update()
                         if senhaCript==usuario[3]:
 
-
                             page.go("/home")
+
                         else:
                             telaLogin.t_fild_passWord.error_text = "Sua senha não esta cadastrada"
                             telaLogin.t_fild_passWord.update()
@@ -116,9 +117,6 @@ def main(page:Page):
         else:
             telaLogin.t_fild_login.error_text = "Este não é uma E-mail não valido"
             telaLogin.t_fild_login.update()
-
-
-
 
     telaLogin.btn_enter.on_click=entrarSistema
 
