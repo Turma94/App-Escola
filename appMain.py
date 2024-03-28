@@ -6,14 +6,11 @@ from views.painels.painelProfessor import PainelProfessor
 from views.painels.painelAulas import PainelAula
 from views.painels.painelUsuarios import PainelUsuario
 from views.painels.painelMateria import PainelMateria
-from utils.testarEntradasUsuario import *
-from DAO.usuarioDAO import listarUsuario
-from utils.criptografia import criptografarSenha
 def main(page:Page):
 
     def fecharPaineis(args):
         for painel in args:
-            painel.visible=False
+            painel.visible = False
             painel.update()
 
     def openMenuHide(e):
@@ -22,51 +19,45 @@ def main(page:Page):
 
     #     Aqui modificamos os paineis
     def change_options_menu_left(e):
-        if e.data=="0":
+        if e.data == "0":
             print("Home")
-        elif e.data=="1":
+
+        elif e.data == "1":
             print("Usuario")
-
-            fecharPaineis([painelProf,painelMateria])
-
-            painelUsuario.visible=True
+            fecharPaineis([painelProf, painelMateria])
+            painelUsuario.visible = True
             painelUsuario.update()
-        elif e.data=="2":
+
+        elif e.data == "2":
             print("Professores")
             fecharPaineis([painelUsuario, painelMateria])
-            painelProf.visible=True
+            painelProf.visible = True
             painelProf.update()
 
-        elif e.data=="3":
+        elif e.data == "3":
             print("Materia")
             fecharPaineis([painelUsuario, painelProf])
-            painelMateria.visible=True
+            painelMateria.visible = True
             painelMateria.update()
+
         elif e.data == "4":
             print("Turma")
-        elif e.data=="5":
+
+        elif e.data == "5":
             print("Aulas")
             fecharPaineis([painelMateria,painelProf,painelUsuario])
-            painelAula.visible=True
+            painelAula.visible = True
             painelAula.update()
-        elif e.data=="6":
+
+        elif e.data == "6":
             print("Relatorio")
-        elif e.data=="7":
+
+        elif e.data == "7":
             print("Fechar")
-
-
-
-
-
-
-
-    # Funções para cadastrar
-    def cadastraUsuario(e):
-        pass
-
 
     # Views Login
     telaLogin = ViewLogin()
+
     # View home
     barHome = ViewHome()
     barHome.btn_menu_hide.on_click = openMenuHide
@@ -83,9 +74,10 @@ def main(page:Page):
     #Painel Aula
     painelAula = PainelAula()
 
+
     #Painel usuario
     painelUsuario=PainelUsuario()
-    painelUsuario.btn_cadastrar.on_click=cadastraUsuario
+    painelUsuario.btn_cadastrar.on_click = painelUsuario.validarCamposCadastro
 
 
     #Painel Materia
@@ -95,37 +87,6 @@ def main(page:Page):
     #Painel Turma
 
 
-
-
-    # Função valida as entradas para entrar no sistema
-    def entrarSistema(e):
-
-        if validar_email(telaLogin.t_fild_login.value):
-            for usuario in listarUsuario():
-
-                if usuario[4]==telaLogin.t_fild_login.value:
-                    telaLogin.t_fild_login.error_text = ""
-                    telaLogin.t_fild_login.update()
-
-                    if testarSenha(telaLogin.t_fild_passWord.value):
-                        senhaCript=criptografarSenha(telaLogin.t_fild_passWord.value)
-                        telaLogin.t_fild_passWord.error_text = ""
-                        telaLogin.t_fild_passWord.update()
-                        if senhaCript==usuario[3]:
-
-                            page.go("/home")
-
-                        else:
-                            telaLogin.t_fild_passWord.error_text = "Sua senha não esta cadastrada"
-                            telaLogin.t_fild_passWord.update()
-                    else:
-                        telaLogin.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
-                        telaLogin.t_fild_passWord.update()
-        else:
-            telaLogin.t_fild_login.error_text = "Este não é uma E-mail não valido"
-            telaLogin.t_fild_login.update()
-
-    telaLogin.btn_enter.on_click=entrarSistema
 
     def changeRoutes(route):
         page.views.clear()
@@ -163,7 +124,7 @@ def main(page:Page):
 
 
 if __name__ == '__main__':
-    app(target=main,assets_dir="assets")
+    app(target=main, assets_dir="assets")
 
 
 

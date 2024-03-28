@@ -1,5 +1,5 @@
 from flet import *
-
+import re
 class PainelUsuario(Container):
 
     def __init__(self):
@@ -21,7 +21,7 @@ class PainelUsuario(Container):
                                    ])
         self.btn_cadastrar = FilledButton(text="CADASTRAR", width=250, height=50, style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
-        }, color="#ffffff", padding=20))
+        }, color="#ffffff", padding=20), on_click=self.validarCamposCadastro)
 
         self.content=Column(controls=[
             Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
@@ -40,9 +40,43 @@ class PainelUsuario(Container):
 
         ], alignment=MainAxisAlignment.SPACE_AROUND)
 
-        self.offset=transform.Offset(0, 0)
+        self.offset = transform.Offset(0, 0)
         self.animate_offset = animation.Animation(500)
-        self.visible=False
+        self.visible = False
+
+    def validarCamposCadastro(self, e):
+        # Define a expressão regular para verificar se há apenas letras (maiúsculas e minúsculas) e espaços
+        regex_nome = r'^[a-zA-Z\s]+$'
+        regex_sobreNome = r'^[a-zA-Z\s]+$'
+        regex_email = r'^[\w\.-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$'
+        # Verifica se os dados correspondem ao padrão
+
+        if re.match(regex_nome, self.t_field_nome.value):
+            self.t_field_nome.error_text = ""
+            self.t_field_nome.update()
+
+            if re.match(regex_sobreNome, self.t_field_sobrenome.value) and self.t_field_sobrenome.value.strip() != "":
+                self.t_field_sobrenome.error_text = ""
+                self.t_field_sobrenome.update()
+
+                if re.match(regex_email, self.t_field_email.value):
+                    self.t_field_email.error_text = ""
+                    self.t_field_email.update()
+
+                else:
+                    self.t_field_email.error_text = "email invalido"
+                    self.t_field_email.update()
+
+
+            else:
+                self.t_field_sobrenome.error_text = "sobreNome invalido"
+                self.t_field_sobrenome.update()
+
+        else:
+            self.t_field_nome.error_text = "Nome invalido"
+            self.t_field_nome.update()
+            return False
+
 
 
 

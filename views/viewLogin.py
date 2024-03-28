@@ -1,5 +1,7 @@
 from flet import *
-
+from utils.testarEntradasUsuario import *
+from DAO.usuarioDAO import listarUsuario
+from utils.criptografia import criptografarSenha
 
 class ViewLogin(UserControl):
 
@@ -12,7 +14,7 @@ class ViewLogin(UserControl):
 
         self.btn_enter = ElevatedButton("ENTRAR", style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
-        }, color="#ffffff", padding=20))
+        }, color="#ffffff", padding=20), on_click=self.entrarSistema)
 
 
     def build(self):
@@ -29,7 +31,32 @@ class ViewLogin(UserControl):
 
             ], alignment=MainAxisAlignment.CENTER)
 
-
-
-
         return layout
+
+    # Função valida as entradas para entrar no sistema
+    def entrarSistema(self, e):
+
+        if validar_email(self.t_fild_login.value):
+            for usuario in listarUsuario():
+
+                if usuario[4]==self.t_fild_login.value:
+                    self.t_fild_login.error_text = ""
+                    self.t_fild_login.update()
+
+                    if testarSenha(self.t_fild_passWord.value):
+                        senhaCript = criptografarSenha(self.t_fild_passWord.value)
+                        self.t_fild_passWord.error_text = ""
+                        self.t_fild_passWord.update()
+                        if senhaCript == usuario[3]:
+
+                            self.page.go("/home")
+
+                        else:
+                            self.t_fild_passWord.error_text = "Sua senha não esta cadastrada"
+                            self.t_fild_passWord.update()
+                    else:
+                        self.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
+                        self.t_fild_passWord.update()
+        else:
+            self.t_fild_login.error_text = "Este não é uma E-mail não valido"
+            self.t_fild_login.update()
