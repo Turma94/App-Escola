@@ -81,7 +81,7 @@ def main(page:Page):
     painelProf.visible=False
 
     #Painel Aula
-    painelAula = PainelAula()
+    painelAula = PainelAula(page)
 
     #Painel usuario
     painelUsuario=PainelUsuario()
