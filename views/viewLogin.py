@@ -8,7 +8,7 @@ class ViewLogin(UserControl):
         self.logo = Image(src=r"logotipo.png")
         self.titleView = Text("LOGIN", color="#060457", size=38)
         self.t_fild_login = TextField(label="Usuario")
-        self.t_fild_passWord = TextField(label="Senha")
+        self.t_fild_passWord = TextField(label="Senha",password=True,can_reveal_password=True)
 
         self.btn_enter = ElevatedButton("ENTRAR", style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"

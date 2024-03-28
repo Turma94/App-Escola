@@ -6,10 +6,8 @@ class PainelUsuario(Container):
         super().__init__()
         # Título
         self.titulo = Text("Gerenciamento de Usuários", size=30)
-
         # Subtitulo
         self.subtitulo = Text("NOVO USUÁRIO", size=25, text_align=TextAlign.CENTER)
-
         # Cadastro
         self.t_field_nome = TextField(label="Nome", width=500)
         self.t_field_sobrenome = TextField(label="Sobrenome", width=500)

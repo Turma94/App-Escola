@@ -4,7 +4,6 @@ import mysql.connector
 
 def conected():
 
-
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
