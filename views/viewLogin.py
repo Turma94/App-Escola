@@ -52,11 +52,11 @@ class ViewLogin(UserControl):
                             self.page.go("/home")
 
                         else:
-                            self.t_fild_passWord.error_text = "Sua senha não esta cadastrada"
+                            self.t_fild_passWord.error_text = "senha incorreta"
                             self.t_fild_passWord.update()
                     else:
-                        self.t_fild_passWord.error_text = "A senha deve conter 8 caracteres!"
+                        self.t_fild_passWord.error_text = "a senha deve conter 4 caracteres"
                         self.t_fild_passWord.update()
         else:
-            self.t_fild_login.error_text = "Este não é uma E-mail não valido"
+            self.t_fild_login.error_text = "e-mail não cadastrado"
             self.t_fild_login.update()

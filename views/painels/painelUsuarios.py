@@ -1,5 +1,6 @@
 from flet import *
 import re
+from DAO.usuarioDAO import *
 class PainelUsuario(Container):
 
     def __init__(self):
@@ -45,37 +46,115 @@ class PainelUsuario(Container):
         self.visible = False
 
     def validarCamposCadastro(self, e):
-        # Define a expressão regular para verificar se há apenas letras (maiúsculas e minúsculas) e espaços
         regex_nome = r'^[a-zA-Z\s]+$'
         regex_sobreNome = r'^[a-zA-Z\s]+$'
         regex_email = r'^[\w\.-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$'
-        # Verifica se os dados correspondem ao padrão
+        regex_senha = r"^\d{4}$"
 
-        if re.match(regex_nome, self.t_field_nome.value):
-            self.t_field_nome.error_text = ""
+        total_validacoes = 0
+
+        if self.t_field_nome.value != "":
+            if re.match(regex_nome, self.t_field_nome.value):
+                self.t_field_nome.error_text = ""
+                self.t_field_nome.update()
+                total_validacoes += 1
+            else:
+                self.t_field_nome.error_text = "*Nome invalido"
+                self.t_field_nome.update()
+        else:
+            self.t_field_nome.error_text = "*Campo obrigatorio"
             self.t_field_nome.update()
 
-            if re.match(regex_sobreNome, self.t_field_sobrenome.value) and self.t_field_sobrenome.value.strip() != "":
+
+        if self.t_field_sobrenome.value != "":
+            if re.match(regex_sobreNome, self.t_field_sobrenome.value):
                 self.t_field_sobrenome.error_text = ""
                 self.t_field_sobrenome.update()
+                total_validacoes += 1
+            else:
+                self.t_field_sobrenome.error_text = "*SobreNome invalido"
+                self.t_field_sobrenome.update()
+        else:
+            self.t_field_sobrenome.error_text = "*Campo obrigatorio"
+            self.t_field_sobrenome.update()
 
-                if re.match(regex_email, self.t_field_email.value):
+
+        if self.t_field_email.value != "":
+            if re.match(regex_email, self.t_field_email.value):
+
+                has_email = False
+
+                for usuario in listarUsuario():
+                    if usuario[4] == self.t_field_email.value:
+                        has_email = True
+
+                if has_email == False:
                     self.t_field_email.error_text = ""
                     self.t_field_email.update()
-
+                    total_validacoes += 1
                 else:
-                    self.t_field_email.error_text = "email invalido"
+                    self.t_field_email.error_text = "Email ja cadastrado"
                     self.t_field_email.update()
 
-
             else:
-                self.t_field_sobrenome.error_text = "sobreNome invalido"
-                self.t_field_sobrenome.update()
-
+                self.t_field_email.error_text = "*Email invalido"
+                self.t_field_email.update()
         else:
-            self.t_field_nome.error_text = "Nome invalido"
+            self.t_field_email.error_text = "*Campo obrigatorio"
+            self.t_field_email.update()
+
+
+        if self.t_field_senha.value != "":
+            if len(self.t_field_senha.value) == 4:
+                if re.match(regex_senha, self.t_field_senha.value):
+                    self.t_field_senha.error_text = ""
+                    self.t_field_senha.update()
+                    total_validacoes += 1
+                else:
+                    self.t_field_senha.error_text = "*A senha deve conter apenas 4 caracteres numericos"
+                    self.t_field_senha.update()
+            else:
+                self.t_field_senha.error_text = "*A senha teve coneter 4 caracteres"
+                self.t_field_senha.update()
+        else:
+            self.t_field_senha.error_text = "*Campo obrigatorio"
+            self.t_field_senha.update()
+
+
+        if self.drop_nivel.value != None:
+            self.drop_nivel.error_text = ""
+            self.drop_nivel.update()
+            total_validacoes += 1
+        else:
+            self.drop_nivel.error_text = "*campo obrigatorio"
+            self.drop_nivel.update()
+
+
+        if total_validacoes == 5:
+
+            #addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,self.t_field_senha.value,self.t_field_email.value,self.drop_nivel.value)
+
+
+
+            self.t_field_nome.value = ""
             self.t_field_nome.update()
-            return False
+
+            self.t_field_sobrenome.value = ""
+            self.t_field_sobrenome.update()
+
+            self.t_field_email.value = ""
+            self.t_field_email.update()
+
+            self.t_field_senha.value = ""
+            self.t_field_senha.update()
+
+            self.drop_nivel.value = None
+            self.drop_nivel.update()
+
+            print("sucesso")
+
+
+
 
 
 

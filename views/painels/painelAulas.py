@@ -88,9 +88,9 @@ class TurmaModal(Container):
         super().__init__()
         self.serie=serie
         self.sigla=sigla
-        self.content = Column(controls=[Text(f"Turma{self.serie}{self.sigla}"),
-                                        IconButton(icon=icons.ADD,on_click=open_modal,data=f"valor{self.serie}{
-                                        self.sigla}")])
+        self.content = Column(controls=[
+            Text(f"Turma{self.serie}{self.sigla}"),
+            IconButton(icon=icons.ADD, on_click=open_modal, data=f"valor{self.serie}{self.sigla}")])
         self.alignment = alignment.center
         self.bgcolor = colors.AMBER_100
         self.border = border.all(1, colors.AMBER_400)
