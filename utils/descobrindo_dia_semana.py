@@ -28,10 +28,6 @@ DIAS = [
 # dia_da_semana = DIAS[indice_da_semana]
 # print(dia_da_semana)
 
-
-
-
-
 def validar_data(data):
     # Verifica se a data é um final de semana (sábado ou domingo)
     if data.weekday() >= 5:
@@ -47,15 +43,17 @@ def validar_data(data):
 if __name__ == '__main__':
 
     # Exemplo de uso da função
-    data_valida = date(2024, 3, 15)  # Quinta-feira
+    data_valida = date(2024, 3, 31)  # Quinta-feira
     data_invalida = date(2024, 3, 28)  # sexta santa
+    print(date(2024, 3, 31))
 
-    if validar_data(data_valida):
-        print("Data válida.")
-    else:
-        print("Data inválida.")
 
-    if validar_data(data_invalida):
-        print("Data válida.")
-    else:
-        print("Data inválida.")
+    # if validar_data(data_valida):
+    #     print("Data válida.")
+    # else:
+    #     print("Data inválida.")
+    #
+    # if validar_data(data_invalida):
+    #     print("Data válida.")
+    # else:
+    #     print("Data inválida.")

@@ -1,160 +1,112 @@
-from Model.materia import Materia
-from Model.usuarios.professor import Professor
-from Model.turma import Turma
+from datetime import datetime, timedelta
 from Model.aula import Aula
-from utils.descobrindo_dia_semana import validar_data
-from datetime import date
-from utils.testarEntradasUsuario import *
 
-# Materias
-# materia1=Materia("1", "Português")
-# materia2=Materia("2", "Matematica")
-# materia3=Materia("3", "Inglês")
-# materia4=Materia("4", "Física")
-#
-# #Professor
-# professor1=Professor("1","Carlos Silva", "1223", "COMUM","CLT")
-# professor2=Professor("2","Maria Aparecida", "1123", "COMUM","CLT")
-# professor3=Professor("3","Tereza Rocha", "1233", "COMUM","EVENTUAL")
-#
+def obter_data_seguinte(data):
+    data_objeto = datetime.strptime(data, '%Y-%m-%d')
+    print(data_objeto)
 
-# Atribuições
-# professor1.materias.append(materia1)
-# professor1.materias.append(materia3)
-# professor2.materias.append(materia1)
-# professor3.materias.append(materia1)
-#
-# # Turma
-# t_4a=Turma("1","4","A","2024","MANHÃ")
-# t_7d=Turma("2","7","D","2024","MANHÃ")
-# t_5a=Turma("3","5","A","2024","TARDE")
+    # Adicionar um dia ao objeto datetime
+    data_seguinte = data_objeto + timedelta(days=1)
 
-listaAulas = list()
-listaTurmas = list()
-listaProf = list()
-listaMaterias = list()
-idMateria = 1
-idProfessor = 1
-idTurma = 1
-idAula = 1
-#Simulando a tela de cadastro de aulas pelo adm
-while True:
-
-    print("""
-    Sistema Teste
-    
-    digite 1 para cadastrar Materia
-    
-    digite 2 para cadastrar professor
-    
-    digite 3 para cadastrar Turma
-    
-    digite 4 para cadastrar Aula
-    
-    digite 5 para gerar relatorios
-    
-    digite 6 para sair do sistema 
-    
-    """)
-
-    entrada = input("resposta: ")
-
-    match entrada:
-        case "1":
-            nome = input("Digite o nome da materia: ")
-            materia = Materia(idMateria, nome)
-            listaMaterias.append(materia)
-            print("materia Cadastrada com sucesso!")
-            idMateria += 1
-
-        case "2":
-            nomeProf=input("Nome Professor: ")
-            senhaProf=input("Digite a sua senha: ")
-            nivel="COMUM"
-            contrato=input("Esolha o nivel CLT | EVENTUAL | ESTAGIO")
-            professor = Professor(idProfessor, nomeProf, senhaProf, nivel, contrato)
-            listaProf.append(professor)
-            idProfessor+=1
-        case "3":
-            print("----------Cadastro de Turmas ----------------")
-            turma=input("Digite a serie ta turma: ")
-            identificador=input("Digite o identificador: ")
-            anoLetivo=input("Digite o ano letivo: ")
-            periodo=input(" escolha o periodo: MANHÃ | TARDE | NOITE")
-            turma=Turma(idTurma, turma, identificador, anoLetivo, "MANHÃ")
-            listaTurmas.append(turma)
-            idTurma+=1
-
-        case "4":
-            print("-----------------Cadastrar Aulas---------------------")
-            while True:
-                print("Para cadastrar uma aula você necessita escolher  a turma  a materia  e professor ")
-                print(" ------------- Lista de Turmas ----------------------- ")
-                for turma in listaTurmas:
-                    print(turma)
-
-                turmaID=input("digite o id da turma escolhida: ")
-                print("#"*50)
-                print(" ------------- Lista de Materias ----------------------- ")
-                for mat in listaMaterias:
-                    print(mat)
-                materID = input("digite o id da turma escolhida: ")
-
-                print(" ------------- Lista de Professor ----------------------- ")
-                for prof in listaProf:
-                    print(prof)
-                profId = input("digite o id da turma escolhida: ")
+    print(data_seguinte)
+    # Converter o objeto datetime de volta para uma string
+    data_seguinte_str = data_seguinte.strftime('%Y-%m-%d')
+    print(data_seguinte_str)
+    return data_seguinte_str
 
 
-                numeroAula=int(input("Digite a o numero da aula: "))
-                while True:
-                    print("---------------------Digite a data -----------------------------")
-                    ano = int(input("ano: "))
-                    mes = int(input("mês: "))
-                    dia = int(input("dia: "))
-                    dataAula = date(ano, mes, dia)
-
-                    if validar_data(dataAula):
-                        listaAulas.append(Aula(idAula, turmaID, profId, materID, numeroAula, dataAula))
-                        break
-                    else:
-                        print("Você precisa digitar uma data valida")
-                respostaSairCadastroAula=input("Deseja sair do cadastro de aulas SIM ou NÃO: ")[0].strip().lower()
-                if respostaSairCadastroAula == "s":
-                    break
-        case "5":
-            while True:
-                print("""
-                Digite A: lista de Professores
-                Digite B: lista de Materias
-                Digite C: lista de Turmas
-                Digite D: lista de Aulas
-                Digite E: Sair
-                """)
-                respostaRelatorio=input("Qual relatorio necessita: ")
-
-                match respostaRelatorio:
-                    case "A":
-                        for prof in listaProf:
-                            print(prof)
-
-                    case "B":
-                        for materia in listaMaterias:
-                            print(materia)
-
-                    case "C":
-                        for turmas in listaTurmas:
-                            print(turmas)
-
-                    case "C":
-                        for aulas in listaAulas:
-                            print(aulas)
-
-                    case "E":
-                        break
-
-        case "6":
-            break
+# data_inicial = '2024-03-31'
+# data_proxima = obter_data_seguinte(data_inicial)
+# print(f"A data seguinte a {data_inicial} é {data_proxima}")
 
 
-print("finalizou o sistema")
+DIAS = [
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-Feira',
+    'Sexta-feira',
+    'Sábado',
+    'Domingo'
+]
+
+aulas = []
+
+def cadastrar_aula(aula: Aula, dias_corridos):
+
+    dia_aula = datetime.strptime(aula.data, '%Y-%m-%d')
+    nome_dia_semana_inical = dia_aula.weekday()
+    nome_dia_semana_atual = DIAS[nome_dia_semana_inical]
+    print("este e o dia a ser cadastrado " + nome_dia_semana_atual)
+    print("-"*30)
+
+    for i in range(dias_corridos):
+
+        dia_aula = dia_aula + timedelta(days=1)
+
+        nome_dia_semana = dia_aula.weekday()
+
+        nome_dia_semana = DIAS[nome_dia_semana]
+
+        if nome_dia_semana_atual == nome_dia_semana:
+
+            nova_aula = Aula(aula.ID_aula, aula.turma, aula.professorResponsavel, aula.professorPresente, aula.materia, aula.numeroAula, dia_aula)
+
+            aulas.append(nova_aula)
+
+            print(f"Aula cadastrada")
+
+def cadastrar_aula2(aula: list, dias_corridos):
+
+    for i in aula:
+
+        dia_aula = datetime.strptime(i.data, '%Y-%m-%d')
+        nome_dia_semana_inical = dia_aula.weekday()
+        nome_dia_semana_atual = DIAS[nome_dia_semana_inical]
+
+        for a in range(dias_corridos):
+
+            dia_aula = dia_aula + timedelta(days=1)
+
+            nome_dia_semana = dia_aula.weekday()
+
+            nome_dia_semana = DIAS[nome_dia_semana]
+
+            if nome_dia_semana_atual == nome_dia_semana:
+
+                nova_aula = Aula(i.ID_aula, i.turma, i.professorResponsavel, i.professorPresente, i.materia, i.numeroAula, dia_aula)
+
+                aulas.append(nova_aula)
+
+                print(f"Aula cadastrada")
+
+    print("-"*30)
+
+
+um_dia_aula = []
+
+aula_1 = Aula("1", "2-A","Carlos","Carlos","Matematica","1","2024-03-11",False)
+aula_2 = Aula("2", "2-A","  Ana ","  Ana ","Portugues ","2","2024-03-11",False)
+aula_3 = Aula("3", "2-A","  Ana ","  Ana ","Portugues ","3","2024-03-11",False)
+aula_4 = Aula("4", "2-A","  Ze  ","  Ze  ","Ed.fisica ","4","2024-03-11",False)
+aula_5 = Aula("5", "2-A","  jão ","  Jão "," Historia ","5","2024-03-11",False)
+aula_6 = Aula("6", "2-A","  Gui ","  Gui ","Geografia ","6","2024-03-11",False)
+aula_7 = Aula("7", "2-A"," Maria"," Maria","   Artes  ","7","2024-03-11",False)
+
+um_dia_aula.append(aula_1)
+um_dia_aula.append(aula_2)
+um_dia_aula.append(aula_3)
+um_dia_aula.append(aula_4)
+um_dia_aula.append(aula_5)
+um_dia_aula.append(aula_6)
+um_dia_aula.append(aula_7)
+
+
+
+#cadastrar_aula(aula_1, 30)
+cadastrar_aula2(um_dia_aula, 21)
+
+for i in aulas:
+    print(f"{i.ID_aula} | {i.turma} | {i.professorResponsavel} | {i.professorPresente} | {i.materia} | {i.numeroAula} | {i.data}")
+
+print(f"total aulas: {len(aulas)}")

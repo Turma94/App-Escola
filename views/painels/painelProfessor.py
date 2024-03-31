@@ -1,4 +1,5 @@
 from flet import *
+import re
 
 class NewProfessor(UserControl):
     def __init__(self, name, sobrenome, contrato, delete_prof):
@@ -87,12 +88,6 @@ class NewProfessor(UserControl):
         self.delete_prof(self)
 
 
-
-
-
-
-
-
 class PainelProfessor(UserControl):
     def build(self):
         self.titulo=Text("Professor", size=38)
@@ -125,7 +120,7 @@ class PainelProfessor(UserControl):
                 Row(
                     controls=[
                         Row(controls=[self.t_field_name, self.t_field_sobrenome, self.drop_contrato]),
-                        FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
+                        FloatingActionButton(icon=icons.ADD, on_click=self.validar_campos),
 
                     ], alignment=MainAxisAlignment.CENTER
                 ),
@@ -134,12 +129,54 @@ class PainelProfessor(UserControl):
 
         )
 
-    def add_clicked(self, e):
-        self.list_prof.controls.append(Checkbox(label=f"{self.t_field_name.value} | {self.t_field_sobrenome.value} | {self.drop_contrato.value}"))
-        self.t_field_name.value = ""
-        self.t_field_sobrenome.value = ""
-        self.update()
-
     def prof_delete(self, professor):
         self.list_prof.controls.remove(professor)
         self.update()
+
+    def validar_campos(self, e):
+        regex_nome = r'^[a-zA-Z\s]+$'
+        regex_sobreNome = r'^[a-zA-Z\s]+$'
+
+        validacoes = 0
+
+        if self.t_field_name.value != "":
+            if re.match(regex_nome, self.t_field_name.value):
+                self.t_field_name.error_text = ""
+                self.t_field_name.update()
+                validacoes += 1
+            else:
+                self.t_field_name.error_text = "*Nome invalido"
+                self.t_field_name.update()
+        else:
+            self.t_field_name.error_text = "*Campo obrigatorio"
+            self.t_field_name.update()
+
+        if self.t_field_sobrenome.value != "":
+            if re.match(regex_sobreNome, self.t_field_sobrenome.value):
+                self.t_field_sobrenome.error_text = ""
+                self.t_field_sobrenome.update()
+                validacoes += 1
+            else:
+                self.t_field_sobrenome.error_text = "*SobreNome invalido"
+                self.t_field_sobrenome.update()
+        else:
+            self.t_field_sobrenome.error_text = "*Campo obrigatorio"
+            self.t_field_sobrenome.update()
+
+        if self.drop_contrato.value != None:
+            self.drop_contrato.error_text = ""
+            self.drop_contrato.update()
+            validacoes += 1
+        else:
+            self.drop_contrato.error_text = "*Campo obrigatorio"
+            self.drop_contrato.update()
+
+        if validacoes == 3:
+
+
+
+            self.list_prof.controls.append(Checkbox(
+                label=f"{self.t_field_name.value} | {self.t_field_sobrenome.value} | {self.drop_contrato.value}"))
+            self.t_field_name.value = ""
+            self.t_field_sobrenome.value = ""
+            self.update()

@@ -134,8 +134,6 @@ class PainelUsuario(Container):
 
             #addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,self.t_field_senha.value,self.t_field_email.value,self.drop_nivel.value)
 
-
-
             self.t_field_nome.value = ""
             self.t_field_nome.update()
 
