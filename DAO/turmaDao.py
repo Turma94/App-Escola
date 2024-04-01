@@ -27,8 +27,15 @@ def inserirTurma(ano_letivo, periodo, serie, sigla_turma):
             cursor.close()
             conn.close()
 
+def selectTurma():
+    conn, cursor = connect()
+    cursor.execute("""SELECT * FROM turma """)
+    lista = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return lista
 
-def selectTurma(serie, sigla):
+def selecionarTurma(serie, sigla):
     conn, cursor = connect()
     cursor.execute("""SELECT id FROM turma WHERE serie = %s AND sigla = %s""", (serie, sigla))
     lista = cursor.fetchall()

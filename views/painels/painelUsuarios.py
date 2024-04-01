@@ -2,6 +2,7 @@ from flet import *
 import re
 from DAO.usuarioDAO import *
 from utils.criptografia import criptografarSenha
+
 class PainelUsuario(Container):
 
     def __init__(self):
