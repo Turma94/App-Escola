@@ -9,7 +9,8 @@ from views.painels.painelMateria import PainelMateria
 from views.painels.painelTurma import PainelTurma
 def main(page:Page):
 
-    page.window_min_width=800
+    page.window_min_width=1100
+    page.window_min_height=900
     def fecharPaineis(args):
         for painel in args:
             painel.visible = False
