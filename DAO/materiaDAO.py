@@ -15,7 +15,7 @@ def connect():
 def addMateria(nome_materia):
     conn, cursor = connect()
     cursor.execute("""
-    INSERT INTO MATERIA(nome) values(%s);
+    INSERT INTO materia(nome) values(%s);
     """, (nome_materia,))
     conn.commit()
     cursor.close()
@@ -26,7 +26,7 @@ def addMateria(nome_materia):
 def listarMaterias():
     conn, cursor = connect()
     cursor.execute("""
-    SELECT * FROM MATERIA;
+    SELECT * FROM materia;
     """)
 
     lista = cursor.fetchall()
@@ -38,14 +38,13 @@ def listarMaterias():
 def deletarMateria(id):
     conn, cursor = connect()
     try:
-        cursor.execute("DELETE FROM materia WHERE id LIKE %s", (id,))
+        cursor.execute("DELETE FROM materia WHERE id = %s", (id,))
         conn.commit()
         print("Materia e registros relacionados excluídos com sucesso.")
     except mysql.connector.Error as error:
         print("Erro ao deletar materia:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
-            conn.commit()
             cursor.close()
             conn.close()
 
