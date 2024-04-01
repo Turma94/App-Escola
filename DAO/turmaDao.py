@@ -37,11 +37,19 @@ def selectTurma():
 
 def selecionarTurma(serie, sigla):
     conn, cursor = connect()
-    cursor.execute("""SELECT id FROM turma WHERE serie = %s AND sigla = %s""", (serie, sigla))
-    lista = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return lista
+    try:
+        cursor.execute("""SELECT id FROM turma WHERE serie = %s AND sigla = %s""", (serie, sigla))
+        lista = cursor.fetchall()
+        conn.commit()
+        print("Turma e registros relacionados buscados com sucesso.")
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar turma:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
 
 
 def deletarTurma(serie, sigla):
@@ -86,9 +94,9 @@ if __name__ == '__main__':
     # inserirTurma("2024", "Noite", "6", "D")
     # for turma in  selectTurma():
     #    print(turma)
-
+    print(selecionarTurma('8','B'))
     # deletarTurma('2', 'A')
-    atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
+    # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
 
 # def atualizarTurma(**kwargs):
