@@ -6,8 +6,10 @@ from views.painels.painelProfessor import PainelProfessor
 from views.painels.painelAulas import PainelAula
 from views.painels.painelUsuarios import PainelUsuario
 from views.painels.painelMateria import PainelMateria
+from views.painels.painelTurma import PainelTurma
 def main(page:Page):
 
+    page.window_min_width=800
     def fecharPaineis(args):
         for painel in args:
             painel.visible = False
@@ -24,28 +26,31 @@ def main(page:Page):
 
         elif e.data == "1":
             print("Usuario")
-            fecharPaineis([painelProf, painelMateria])
+            fecharPaineis([painelProf, painelMateria,painelAula,painelTurma])
             painelUsuario.visible = True
             painelUsuario.update()
 
         elif e.data == "2":
             print("Professores")
-            fecharPaineis([painelUsuario, painelMateria])
+            fecharPaineis([painelUsuario, painelMateria,painelTurma,painelAula])
             painelProf.visible = True
             painelProf.update()
 
         elif e.data == "3":
             print("Materia")
-            fecharPaineis([painelUsuario, painelProf])
+            fecharPaineis([painelUsuario, painelProf,painelAula,painelTurma])
             painelMateria.visible = True
             painelMateria.update()
 
         elif e.data == "4":
+            fecharPaineis([painelUsuario, painelProf,painelMateria, painelAula])
+            painelTurma.visible = True
+            painelTurma.update()
             print("Turma")
 
         elif e.data == "5":
             print("Aulas")
-            fecharPaineis([painelMateria,painelProf,painelUsuario])
+            fecharPaineis([painelMateria,painelProf,painelUsuario,painelTurma])
             painelAula.visible = True
             painelAula.update()
 
@@ -85,7 +90,7 @@ def main(page:Page):
     painelMateria.visible=False
 
     #Painel Turma
-
+    painelTurma=PainelTurma()
 
 
     def changeRoutes(route):
@@ -110,7 +115,8 @@ def main(page:Page):
                         painelProf,
                         painelAula,
                         painelUsuario,
-                        painelMateria
+                        painelMateria,
+                        painelTurma
 
                     ], drawer=optionsMenu
                 )
