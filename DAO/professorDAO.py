@@ -79,3 +79,4 @@ if __name__ == '__main__':
 # addProfessor('ESTAGIO', 'nicollas@gmail.com')
 # atualizarProfessor('ESTAGIO', 'nicollas@gmail.com')
 print(selecionarProfessor('VANESSA@contato.com'))
+atualizarProfessor('EVENTUAL','VANESSA@contato.com')

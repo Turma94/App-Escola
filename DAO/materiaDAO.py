@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def connect():
     conn = mysql.connector.connect(
         host='localhost',
@@ -7,17 +8,15 @@ def connect():
         password='123',
         database='escola'
     )
-    cursor=conn.cursor()
+    cursor = conn.cursor()
     return conn, cursor
 
 
-
 def addMateria(nome_materia):
-
     conn, cursor = connect()
     cursor.execute("""
     INSERT INTO MATERIA(nome) values(%s);
-    """,(nome_materia,))
+    """, (nome_materia,))
     conn.commit()
     cursor.close()
     conn.close()
@@ -30,10 +29,25 @@ def listarMaterias():
     SELECT * FROM MATERIA;
     """)
 
-    lista=cursor.fetchall()
+    lista = cursor.fetchall()
     cursor.close()
     conn.close()
     return lista
+
+
+def deletarMateria(id):
+    conn, cursor = connect()
+    try:
+        cursor.execute("DELETE FROM materia WHERE id LIKE %s", (id,))
+        conn.commit()
+        print("Materia e registros relacionados excluídos com sucesso.")
+    except mysql.connector.Error as error:
+        print("Erro ao deletar materia:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            conn.commit()
+            cursor.close()
+            conn.close()
 
 
 if __name__ == '__main__':
@@ -43,3 +57,4 @@ if __name__ == '__main__':
     # addMateria("Quimica")
     for materia in listarMaterias():
         print(materia)
+    deletarMateria('3')
