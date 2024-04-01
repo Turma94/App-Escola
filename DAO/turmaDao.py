@@ -27,6 +27,7 @@ def inserirTurma(ano_letivo, periodo, serie, sigla_turma):
             cursor.close()
             conn.close()
 
+
 def selectTurma():
     conn, cursor = connect()
     cursor.execute("""SELECT * FROM turma """)
@@ -34,6 +35,7 @@ def selectTurma():
     cursor.close()
     conn.close()
     return lista
+
 
 def selecionarTurma(serie, sigla):
     conn, cursor = connect()
@@ -51,7 +53,6 @@ def selecionarTurma(serie, sigla):
             conn.close()
 
 
-
 def deletarTurma(serie, sigla):
     conn, cursor = connect()
     try:
@@ -65,6 +66,7 @@ def deletarTurma(serie, sigla):
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
             conn.close()
+
 
 def atualizarTurma(anoLetivo, periodo, serie, sigla, serie_antiga, sigla_antiga):
     conn, cursor = connect()
@@ -84,8 +86,6 @@ def atualizarTurma(anoLetivo, periodo, serie, sigla, serie_antiga, sigla_antiga)
             conn.close()
 
 
-
-
 if __name__ == '__main__':
     # data=dt.date(2024,7,22)
     # inserirTurma("2024","Tarde","4","A")
@@ -94,8 +94,8 @@ if __name__ == '__main__':
     # inserirTurma("2024", "Noite", "6", "D")
     # for turma in  selectTurma():
     #    print(turma)
-    print(selecionarTurma('8','B'))
+    print(selecionarTurma('8', 'B'))
     # deletarTurma('2', 'A')
     # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
-    atualizarTurma('2025','NOITE','6','A','8','B')
+    atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')
