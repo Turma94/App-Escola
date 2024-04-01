@@ -52,7 +52,6 @@ class PainelAula(Container):
             t=TurmaModal(turma[3],turma[4], self.open_modal)
             self.tabelaTurma.controls.append(
                 t
-
             )
 
     def pegarTurma(self,serie, sigla):
@@ -60,8 +59,7 @@ class PainelAula(Container):
 
 
     def open_modal(self,e):
-        print(e)
-
+        print(e.target)
         self.page.dialog = self.modalAula
         self.modalAula.open = True
         self.page.update()

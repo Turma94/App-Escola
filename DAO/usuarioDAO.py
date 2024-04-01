@@ -18,7 +18,7 @@ def addUsuario(nome,sobrenome,senha,email,nivel):
     conn, cursor = conected()
     cursor.execute("""
         INSERT INTO usuarios (nome,sobreNome,senha,email,nivel)
-        VALUES(?,?,?,?,?)
+        VALUES(%s,%s,%s,%s,%s);
     """,(nome,sobrenome,senha,email,nivel))
     conn.commit()
     cursor.close()
@@ -53,9 +53,9 @@ if __name__ == '__main__':
 
     # senhaGerada=criptografarSenha(input("digite uma senha: "))
     #
-    # addUsuario("rogerio","sobral",
-    #            senhaGerada,
-    #            "sobralcomix@gmail.com","COMUM")
+    addUsuario("maria","rocha",
+               "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+               "maria@gmail.com","ADM")
 
     for i in listarUsuario():
         print(i)
