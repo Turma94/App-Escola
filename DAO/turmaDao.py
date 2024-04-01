@@ -98,22 +98,4 @@ if __name__ == '__main__':
     # deletarTurma('2', 'A')
     # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
-
-# def atualizarTurma(**kwargs):
-#     conn, cursor = connect()
-#     try:
-#         for coluna, valor in kwargs.items():
-#             cursor.execute(f"SELECT id FROM turma WHERE {coluna} = %s", (valor, ))
-#             ids = [registro[0] for registro in cursor.fetchall()]
-#
-#             for id_registro in ids:
-#                 cursor.execute(f"UPDATE turma SET {coluna} = %s WHERE id = %s", (valor, id_registro))
-#         conn.commit()
-#         print("Turma e registros relacionados atualizados com sucesso.")
-#     except mysql.connector.Error as error:
-#         print("Erro ao atualizar turma:", error)
-#     finally:
-#         if 'conn' in locals() and conn.is_connected():
-#             conn.commit()
-#             cursor.close()
-#             conn.close()
+    atualizarTurma('2025','NOITE','6','A','8','B')
