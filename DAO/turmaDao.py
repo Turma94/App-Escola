@@ -22,7 +22,7 @@ def inserirTurma(ano_letivo,periodo,serie,sigla_turma):
 
     conn, cursor = connect()
     cursor.execute("""INSERT INTO turma (anoLetivo,periodo,serie,sigla)
-    VALUES(?,?,?,?)
+    VALUES(%s,%s,%s,%s)
     """,(ano_letivo,periodo,serie,sigla_turma))
     conn.commit()
     cursor.close()
@@ -44,7 +44,7 @@ def selectTurma():
 
 if __name__ == '__main__':
 
-    data=dt.date(2024,7,22)
+    # data=dt.date(2024,7,22)
     # inserirTurma("2024","Tarde","4","A")
     # inserirTurma(data, "MANHA", "8", "B")
     # inserirTurma("2024", "Tarde", "5", "C")
