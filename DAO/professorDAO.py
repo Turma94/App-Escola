@@ -15,7 +15,8 @@ def conected():
 def addProfessor(categoria, email):
     conn, cursor = conected()
     try:
-        cursor.execute("""INSERT INTO professor (categoria, idUsuario) SELECT %s, id FROM usuarios WHERE email = %s """,(categoria, email))
+        cursor.execute("""INSERT INTO professor (categoria, idUsuario) SELECT %s, id FROM usuarios WHERE email = %s """,
+                       (categoria, email))
         conn.commit()
         print("Cadastrado com sucesso!")
     except mysql.connector.Error as error:
@@ -24,6 +25,7 @@ def addProfessor(categoria, email):
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
             conn.close()
+
 
 def selectProfessor():
     conn, cursor = conected()
@@ -34,6 +36,7 @@ def selectProfessor():
     cursor.close()
     conn.close()
     return lista
+
 
 def atualizarProfessor(categoria, email):
     conn, cursor = conected()
@@ -52,10 +55,27 @@ def atualizarProfessor(categoria, email):
             conn.close()
 
 
+def selecionarProfessor(emailUsuario):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT usuarios.nome, usuarios.email, professor.categoria FROM usuarios JOIN professor ON 
+        usuarios.id = professor.idUsuario WHERE usuarios.email = %s""",
+                       (emailUsuario,))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar usuario:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 
 if __name__ == '__main__':
     pass
 
 #
 # addProfessor('ESTAGIO', 'nicollas@gmail.com')
-atualizarProfessor('EFETIVO','nicollas@gmail.com')
+# atualizarProfessor('ESTAGIO', 'nicollas@gmail.com')
+print(selecionarProfessor('VANESSA@contato.com'))
