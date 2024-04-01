@@ -6,7 +6,7 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='123',
         database='escola'
     )
     cursor=conn.cursor()
@@ -27,7 +27,6 @@ def addUsuario(nome,sobrenome,senha,email,nivel, status):
 def deletarUsuario(email):
     conn, cursor = conected()
     try:
-        conn, cursor = conected()
         cursor.execute("DELETE FROM usuarios WHERE email LIKE %s", (email,))
         conn.commit()
         print("Usuário e registros relacionados excluídos com sucesso.")
