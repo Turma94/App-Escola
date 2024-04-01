@@ -23,6 +23,24 @@ class PainelUsuario(Container):
         self.btn_cadastrar = FilledButton(text="CADASTRAR", width=250, height=50, style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
         }, color="#ffffff", padding=20), on_click=self.validarCamposCadastro)
+        self.list_view_table_cartridges = GridView(expand=1, spacing=0, padding=0, height=300)
+
+        self.tabela = DataTable(
+            columns=[
+                DataColumn(Text("Nome")),
+                DataColumn(Text("Sobrenome")),
+                DataColumn(Text("Email")),
+                DataColumn(Text("Nível"))
+            ],
+            expand=True,
+            show_checkbox_column=True,
+            sort_column_index=0,
+            sort_ascending=True,
+            on_select_all=True
+
+        )
+
+        self.list_view_table_cartridges.controls.append(self.tabela)
 
         self.content=Column(controls=[
             Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
@@ -35,15 +53,19 @@ class PainelUsuario(Container):
                 Row(controls=[self.t_field_email], alignment=MainAxisAlignment.CENTER),
 
                 Row(controls=[self.t_field_senha, self.drop_nivel], alignment=MainAxisAlignment.CENTER),
-                Row(controls=[self.btn_cadastrar], alignment=MainAxisAlignment.SPACE_AROUND)
+                Row(controls=[self.btn_cadastrar], alignment=MainAxisAlignment.SPACE_AROUND),
+                Row(controls=[self.list_view_table_cartridges],alignment=MainAxisAlignment.CENTER)
 
             ], alignment=MainAxisAlignment.CENTER)
 
         ], alignment=MainAxisAlignment.SPACE_AROUND)
 
+
         self.offset = transform.Offset(0, 0)
         self.animate_offset = animation.Animation(500)
         self.visible = False
+
+        self.carregarTabela()
 
     def validarCamposCadastro(self, e):
         regex_nome = r'^[a-zA-Z\s]+$'
@@ -152,6 +174,22 @@ class PainelUsuario(Container):
             print("sucesso")
 
 
+
+    def carregarTabela(self):
+
+        for usuario in listarUsuario():
+            self.tabela.rows.append(DataRow(
+                                        data="seila",
+                                        cells=[
+                                            DataCell(Text(usuario[1])),
+                                            DataCell(Text(usuario[2])),
+                                            DataCell(Text(usuario[4])),
+                                            DataCell(Text(usuario[5]))
+
+                                        ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
+
+
+                                        )))
 
 
 

@@ -18,7 +18,7 @@ class PainelAula(Container):
                     Column(
                         [
                             Row(controls=[]),
-                            ElevatedButton("Close bottom sheet", on_click=self.close_aulasSemana),
+                            ElevatedButton("Fechando as aulas Semana", on_click=self.close_aulasSemana),
                         ],
                         tight=True,
                     ),

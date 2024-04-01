@@ -50,3 +50,4 @@ class PainelTurma(Container):
         self.offset = transform.Offset(0, 0)
         self.animate_offset = animation.Animation(500)
         self.visible = False
+
