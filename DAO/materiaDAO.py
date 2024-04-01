@@ -35,14 +35,14 @@ def listarMaterias():
     return lista
 
 
-def deletarMateria(id):
+def atualizarMateria(nome, nome_antigo):
     conn, cursor = connect()
     try:
-        cursor.execute("DELETE FROM materia WHERE id = %s", (id,))
+        cursor.execute("UPDATE materia SET nome = %s WHERE nome = %s", (nome, nome_antigo))
         conn.commit()
-        print("Materia e registros relacionados excluídos com sucesso.")
+        print("Materia e registros relacionados atualizado com sucesso.")
     except mysql.connector.Error as error:
-        print("Erro ao deletar materia:", error)
+        print("Erro ao atualizar materia:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
@@ -56,4 +56,5 @@ if __name__ == '__main__':
     # addMateria("Quimica")
     for materia in listarMaterias():
         print(materia)
-    deletarMateria('3')
+
+atualizarMateria('Geografia', 'ingles')
