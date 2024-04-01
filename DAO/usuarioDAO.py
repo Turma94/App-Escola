@@ -34,7 +34,6 @@ def deletarUsuario(email):
         print("Erro ao deletar usuário:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
-            conn.commit()
             cursor.close()
             conn.close()
 
