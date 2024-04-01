@@ -1,5 +1,4 @@
 from hashlib import sha256
-from hashlib import sha256
 
 def criptografarSenha(senha):
     senha = sha256(senha.encode())
