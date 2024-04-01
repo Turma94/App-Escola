@@ -57,4 +57,4 @@ if __name__ == '__main__':
     for materia in listarMaterias():
         print(materia)
 
-atualizarMateria('Geografia', 'ingles')
+atualizarMateria('Religião', 'Religiao')
