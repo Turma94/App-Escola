@@ -104,7 +104,7 @@ um_dia_aula.append(aula_7)
 
 
 #cadastrar_aula(aula_1, 30)
-cadastrar_aula2(um_dia_aula, 21)
+cadastrar_aula2(um_dia_aula, 40)
 
 for i in aulas:
     print(f"{i.ID_aula} | {i.turma} | {i.professorResponsavel} | {i.professorPresente} | {i.materia} | {i.numeroAula} | {i.data}")

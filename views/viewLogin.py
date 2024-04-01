@@ -49,7 +49,12 @@ class ViewLogin(UserControl):
                         self.t_fild_passWord.update()
                         if senhaCript == usuario[3]:
 
-                            self.page.go("/home")
+                            if usuario[5] != "COMUM":
+
+                                self.page.go("/home")
+                            else:
+                                self.t_fild_login.error_text = "Este usuario nao tem permissao!"
+                                self.t_fild_login.update()
 
                         else:
                             self.t_fild_passWord.error_text = "senha incorreta"

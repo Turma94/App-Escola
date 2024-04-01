@@ -49,5 +49,7 @@ if __name__ == '__main__':
     # inserirTurma(data, "MANHA", "8", "B")
     # inserirTurma("2024", "Tarde", "5", "C")
     # inserirTurma("2024", "Noite", "6", "D")
-    for turma in  selectTurma():
-       print(turma)
+    # for turma in  selectTurma():
+    #    print(turma)
+
+    selectTurma()

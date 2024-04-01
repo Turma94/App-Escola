@@ -1,6 +1,7 @@
 from flet import *
 import re
 from DAO.usuarioDAO import *
+from utils.criptografia import criptografarSenha
 class PainelUsuario(Container):
 
     def __init__(self):
@@ -17,8 +18,8 @@ class PainelUsuario(Container):
         self.drop_nivel = Dropdown(label="Nível", width=500,
                                    options=[
                                        dropdown.Option("COMUM"),
-                                       dropdown.Option("ADM"),
-                                       dropdown.Option("GERENTE")
+                                       dropdown.Option("ADMINISTRADOR"),
+                                       dropdown.Option("GERENCIA")
                                    ])
         self.btn_cadastrar = FilledButton(text="CADASTRAR", width=250, height=50, style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
@@ -74,6 +75,8 @@ class PainelUsuario(Container):
         regex_senha = r"^\d{4}$"
 
         total_validacoes = 0
+
+        print(self.drop_nivel.value)
 
         if self.t_field_nome.value != "":
             if re.match(regex_nome, self.t_field_nome.value):
@@ -144,6 +147,7 @@ class PainelUsuario(Container):
 
 
         if self.drop_nivel.value != None:
+            print(self.drop_nivel.value)
             self.drop_nivel.error_text = ""
             self.drop_nivel.update()
             total_validacoes += 1
@@ -154,7 +158,9 @@ class PainelUsuario(Container):
 
         if total_validacoes == 5:
 
-            #addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,self.t_field_senha.value,self.t_field_email.value,self.drop_nivel.value)
+            print(self.drop_nivel.value)
+
+            addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,criptografarSenha(self.t_field_senha.value),self.t_field_email.value, self.drop_nivel.value)
 
             self.t_field_nome.value = ""
             self.t_field_nome.update()
