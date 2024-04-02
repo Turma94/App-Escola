@@ -33,10 +33,33 @@ class PainelTurma(Container):
                                      ])
         self.t_field_ano_letivo = TextField(label="Ano Letivo", width=300)
 
+        self.list_view_table_cartridges = GridView(expand=1, spacing=0, padding=0, height=400)
+
         self.btn_cadastrar = FilledButton(text="CADASTRAR", width=250, height=50, style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
         }, color="#ffffff", padding=20), on_click=self.cadastraTurma)
-        self.content = Column(controls=[
+
+        self.tabela = DataTable(
+            columns=[
+                DataColumn(Text("ID")),
+                DataColumn(Text("Ano Letivo")),
+                DataColumn(Text("Periodo")),
+                DataColumn(Text("Série")),
+                DataColumn(Text("Sigla")),
+
+            ],
+            expand=True,
+            show_checkbox_column=True,
+            sort_column_index=0,
+            sort_ascending=True,
+            on_select_all=True
+
+        )
+
+
+        self.list_view_table_cartridges.controls.append(self.tabela)
+
+        self.content = Column (  controls=[
             Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
             Divider(thickness=2),
             Column(controls=[
@@ -46,12 +69,16 @@ class PainelTurma(Container):
                     alignment=MainAxisAlignment.CENTER),
                 Row(controls=[self.drop_turma, self.drop_sigla], alignment=MainAxisAlignment.CENTER),
                 Row(controls=[self.t_field_ano_letivo, self.drop_periodo], alignment=MainAxisAlignment.CENTER),
-                Row(controls=[self.btn_cadastrar], alignment=MainAxisAlignment.SPACE_AROUND)
-            ], alignment=MainAxisAlignment.CENTER)
-        ], alignment=MainAxisAlignment.SPACE_AROUND)
+                Row(controls=[self.btn_cadastrar], alignment=MainAxisAlignment.SPACE_AROUND),
+                Row(controls=[self.list_view_table_cartridges], alignment=MainAxisAlignment.CENTER)
+            ], alignment=MainAxisAlignment.CENTER),
+
+
+        ],alignment=MainAxisAlignment.SPACE_AROUND)
         self.offset = transform.Offset(0, 0)
         self.animate_offset = animation.Animation(500)
         self.visible = False
+        self.carregarTabela()
 
 
     def cadastraTurma(self, e):
@@ -105,7 +132,9 @@ class PainelTurma(Container):
 
         for turma in selectTurma():
             # (1, datetime.date(2024, 3, 26), 'MANHA', '1', 'B')
-            if self.drop_turma.value == turma[3] and self.drop_sigla.value == turma[4] and self.drop_periodo.value == turma[2]:
+            if (self.drop_turma.value == turma[3]
+                    and self.drop_sigla.value == turma[4]
+                    and self.drop_periodo.value == turma[2]):
                 print(turma[3], turma[4], turma[2])
                 tema_turma = True
 
@@ -127,4 +156,25 @@ class PainelTurma(Container):
                 self.drop_periodo.update()
                 self.t_field_ano_letivo.error_text = ""
                 self.t_field_ano_letivo.update()
+                self.tabela.rows.clear()
+                self.carregarTabela()
+                self.tabela.update()
 
+ # estou carregando os dados para a tabela
+    def carregarTabela(self):
+
+        for turma in selectTurma():
+            self.tabela.rows.append(DataRow(
+                                        data="seila",
+                                        cells=[
+                                            DataCell(Text(turma[0])),
+                                            DataCell(Text(turma[1])),
+                                            DataCell(Text(turma[2])),
+                                            DataCell(Text(turma[3])),
+                                            DataCell(Text(turma[4]))
+
+
+                                        ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
+
+
+                                        )))

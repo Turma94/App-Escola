@@ -25,14 +25,19 @@ class PainelUsuario(Container):
         self.btn_cadastrar = FilledButton(text="CADASTRAR", width=250, height=50, style=ButtonStyle(bgcolor={
             MaterialState.DEFAULT: "#060457", MaterialState.HOVERED: "#030232"
         }, color="#ffffff", padding=20), on_click=self.validarCamposCadastro)
-        self.list_view_table_cartridges = GridView(expand=1, spacing=0, padding=0, height=300)
 
+
+        self.list_view_table_cartridges = GridView(expand=1, spacing=0, padding=0, height=400)
+
+        # Estou criando a tabela
         self.tabela = DataTable(
             columns=[
+                DataColumn(Text("ID")),
                 DataColumn(Text("Nome")),
                 DataColumn(Text("Sobrenome")),
                 DataColumn(Text("Email")),
-                DataColumn(Text("Nível"))
+                DataColumn(Text("Nível")),
+                DataColumn(Text("Status"))
             ],
             expand=True,
             show_checkbox_column=True,
@@ -80,7 +85,7 @@ class PainelUsuario(Container):
         print(self.drop_nivel.value)
 
         if self.t_field_nome.value != "":
-            if re.match(regex_nome, self.t_field_nome.value):
+            if re.match(regex_nome, self.t_field_nome.value.replace(" ", "").capitalize()):
                 self.t_field_nome.error_text = ""
                 self.t_field_nome.update()
                 total_validacoes += 1
@@ -93,12 +98,12 @@ class PainelUsuario(Container):
 
 
         if self.t_field_sobrenome.value != "":
-            if re.match(regex_sobreNome, self.t_field_sobrenome.value):
+            if re.match(regex_sobreNome, self.t_field_sobrenome.value.replace(" ", "").capitalize()):
                 self.t_field_sobrenome.error_text = ""
                 self.t_field_sobrenome.update()
                 total_validacoes += 1
             else:
-                self.t_field_sobrenome.error_text = "*SobreNome invalido"
+                self.t_field_sobrenome.error_text = "*Sobrenome invalido"
                 self.t_field_sobrenome.update()
         else:
             self.t_field_sobrenome.error_text = "*Campo obrigatorio"
@@ -106,7 +111,7 @@ class PainelUsuario(Container):
 
 
         if self.t_field_email.value != "":
-            if re.match(regex_email, self.t_field_email.value):
+            if re.match(regex_email, self.t_field_email.value.replace(" ", "")):
 
                 has_email = False
 
@@ -159,9 +164,13 @@ class PainelUsuario(Container):
 
         if total_validacoes == 5:
 
-            print(self.drop_nivel.value)
+            # print(self.drop_nivel.value)
 
-            addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,criptografarSenha(self.t_field_senha.value),self.t_field_email.value, self.drop_nivel.value, "False")
+            addUsuario(self.t_field_nome.value.replace(" ", "").capitalize(),
+                       self.t_field_sobrenome.value.replace(" ", "").capitalize(),
+                       criptografarSenha(self.t_field_senha.value),
+                       self.t_field_email.value,
+                       self.drop_nivel.value, "False")
 
             self.t_field_nome.value = ""
             self.t_field_nome.update()
@@ -177,21 +186,27 @@ class PainelUsuario(Container):
 
             self.drop_nivel.value = None
             self.drop_nivel.update()
+            self.tabela.rows.clear()
+            self.carregarTabela()
+            self.tabela.update()
 
             print("sucesso")
 
 
-
+    # estou carregando os dados para a tabela
     def carregarTabela(self):
+
 
         for usuario in listarUsuario():
             self.tabela.rows.append(DataRow(
                                         data="seila",
                                         cells=[
+                                            DataCell(Text(usuario[0])),
                                             DataCell(Text(usuario[1])),
                                             DataCell(Text(usuario[2])),
                                             DataCell(Text(usuario[4])),
-                                            DataCell(Text(usuario[5]))
+                                            DataCell(Text(usuario[5])),
+                                            DataCell(Text(usuario[6])),
 
                                         ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
 
