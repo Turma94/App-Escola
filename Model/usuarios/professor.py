@@ -53,7 +53,7 @@ class Professor(User):
 
     def verAulas(self):
         for aula in self.__aulas:
-            print(f"`{aula.ID_aula} {aula.materia} {aula.numeroAula} {aula.data}")
+            print(f"`{aula.ID_aula} {aula.turma} {aula.materia} {aula.numeroAula} {aula.data}")
 
     def addAula(self, entradaAula:Aula):
 
@@ -95,12 +95,12 @@ if __name__ == '__main__':
     t_4a = Turma("1", "4", "A", "2024", "MANHÃ")
 
     ############################################################
-    aula1 = Aula(ID_aula="1", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
-    aula2 = Aula(ID_aula="2", turma=t_4a.serie, professorResponsavel=professor2.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
-    aula3 = Aula(ID_aula="3", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/04/2024")
-    aula4 = Aula(ID_aula="4", turma=t_4a.serie, professorResponsavel=professor2.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="22/03/2024")
-    aula5 = Aula(ID_aula="5", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="3", data="20/03/2024")
-    aula6 = Aula(ID_aula="6", turma=t_4a.serie, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="4", data="20/03/2024")
+    aula1 = Aula(ID_aula="1", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
+    aula2 = Aula(ID_aula="2", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor2.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/03/2024")
+    aula3 = Aula(ID_aula="3", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="2", data="20/04/2024")
+    aula4 = Aula(ID_aula="4", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor2.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="2", data="22/03/2024")
+    aula5 = Aula(ID_aula="5", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor1.nome, professorPresente=professor2.nome, mateia=materia1.nome, numeroAula="3", data="20/03/2024")
+    aula6 = Aula(ID_aula="6", turma=t_4a.serie + t_4a.identificador, professorResponsavel=professor1.nome, professorPresente=professor1.nome, mateia=materia1.nome, numeroAula="4", data="20/03/2024")
 
     ###############################################
 

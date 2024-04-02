@@ -87,6 +87,9 @@ def atualizarTurma(anoLetivo, periodo, serie, sigla, serie_antiga, sigla_antiga)
 
 
 if __name__ == '__main__':
+    for i in selectTurma():
+        print(i[4])
+
     # data=dt.date(2024,7,22)
     # inserirTurma("2024","Tarde","4","A")
     # inserirTurma('2024', "MANHA", "8", "B")
@@ -94,8 +97,8 @@ if __name__ == '__main__':
     # inserirTurma("2024", "Noite", "6", "D")
     # for turma in  selectTurma():
     #    print(turma)
-    print(selecionarTurma('8', 'B'))
+    #print(selecionarTurma('8', 'B'))
     # deletarTurma('2', 'A')
     # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
-    atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')
+    #atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')

@@ -161,7 +161,7 @@ class PainelUsuario(Container):
 
             print(self.drop_nivel.value)
 
-            addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,criptografarSenha(self.t_field_senha.value),self.t_field_email.value, self.drop_nivel.value)
+            addUsuario(self.t_field_nome.value,self.t_field_sobrenome.value,criptografarSenha(self.t_field_senha.value),self.t_field_email.value, self.drop_nivel.value, "False")
 
             self.t_field_nome.value = ""
             self.t_field_nome.update()

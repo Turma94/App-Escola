@@ -35,33 +35,39 @@ class ViewLogin(UserControl):
 
     # Função valida as entradas para entrar no sistema
     def entrarSistema(self, e):
+        if self.t_fild_login.value != "":
+            if validar_email(self.t_fild_login.value):
+                for usuario in listarUsuario():
 
-        if validar_email(self.t_fild_login.value):
-            for usuario in listarUsuario():
+                    if usuario[4] == self.t_fild_login.value:
+                        self.t_fild_login.error_text = ""
+                        self.t_fild_login.update()
 
-                if usuario[4]==self.t_fild_login.value:
-                    self.t_fild_login.error_text = ""
-                    self.t_fild_login.update()
+                        if testarSenha(self.t_fild_passWord.value):
+                            senhaCript = criptografarSenha(self.t_fild_passWord.value)
+                            self.t_fild_passWord.error_text = ""
+                            self.t_fild_passWord.update()
+                            if senhaCript == usuario[3]:
 
-                    if testarSenha(self.t_fild_passWord.value):
-                        senhaCript = criptografarSenha(self.t_fild_passWord.value)
-                        self.t_fild_passWord.error_text = ""
-                        self.t_fild_passWord.update()
-                        if senhaCript == usuario[3]:
+                                if usuario[5] != "COMUM":
 
-                            if usuario[5] != "COMUM":
+                                    self.page.go("/home")
+                                else:
+                                    self.t_fild_login.error_text = "*Este usuario não tem permissão!"
+                                    self.t_fild_login.update()
 
-                                self.page.go("/home")
                             else:
-                                self.t_fild_login.error_text = "Este usuario nao tem permissao!"
-                                self.t_fild_login.update()
-
+                                self.t_fild_passWord.error_text = "*senha incorreta"
+                                self.t_fild_passWord.update()
                         else:
-                            self.t_fild_passWord.error_text = "senha incorreta"
+                            self.t_fild_passWord.error_text = "*a senha deve conter 4 caracteres"
                             self.t_fild_passWord.update()
                     else:
-                        self.t_fild_passWord.error_text = "a senha deve conter 4 caracteres"
-                        self.t_fild_passWord.update()
+                        self.t_fild_login.error_text = "*e-mail não cadastrado"
+                        self.t_fild_login.update()
+            else:
+                self.t_fild_login.error_text = "*e-mail invalido"
+                self.t_fild_login.update()
         else:
-            self.t_fild_login.error_text = "e-mail não cadastrado"
+            self.t_fild_login.error_text = "*Campo obrigatorio"
             self.t_fild_login.update()
