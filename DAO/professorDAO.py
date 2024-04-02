@@ -20,7 +20,7 @@ def addProfessor(nome, sobrenome, categoria):
         conn.commit()
         print("Cadastrado com sucesso!")
     except mysql.connector.Error as error:
-        print("Erro ao deletar usuário:", error)
+        print("Erro ao cadastrar professor:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
