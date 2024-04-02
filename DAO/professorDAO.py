@@ -5,18 +5,18 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='123',
+        password='',
         database='escola'
     )
     cursor = conn.cursor()
     return conn, cursor
 
 
-def addProfessor(categoria, email):
+def addProfessor(nome, sobrenome, categoria):
     conn, cursor = conected()
     try:
-        cursor.execute("""INSERT INTO professor (categoria, idUsuario) SELECT %s, id FROM usuarios WHERE email = %s """,
-                       (categoria, email))
+        cursor.execute("""INSERT INTO professor (categoria, idUsuario) SELECT %s, id FROM usuarios WHERE nome = %s AND sobreNome = %s""",
+                       (categoria, nome, sobrenome))
         conn.commit()
         print("Cadastrado com sucesso!")
     except mysql.connector.Error as error:
@@ -78,5 +78,6 @@ if __name__ == '__main__':
 #
 # addProfessor('ESTAGIO', 'nicollas@gmail.com')
 # atualizarProfessor('ESTAGIO', 'nicollas@gmail.com')
-print(selecionarProfessor('VANESSA@contato.com'))
-atualizarProfessor('EVENTUAL','VANESSA@contato.com')
+# print(selecionarProfessor('VANESSA@contato.com'))
+# atualizarProfessor('EVENTUAL','VANESSA@contato.com')
+addProfessor('Maria', 'Rocha', 'EFETIVO')
