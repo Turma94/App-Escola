@@ -88,6 +88,8 @@ class NewProfessor(UserControl):
         self.delete_prof(self)
 
 
+
+
 class PainelProfessor(UserControl):
     def build(self):
         self.titulo=Text("Professor", size=38)
@@ -110,6 +112,29 @@ class PainelProfessor(UserControl):
 
 
         # A tela que será retornada
+        # Colocar aqui a tabela
+        # estou criando um espaço para alocar a tabtela
+        self.list_view_table_cartridges = GridView(expand=1, spacing=0, padding=0, height=400)
+
+        # estou construindo a tabela
+        self.tabela = DataTable(
+            columns=[
+                DataColumn(Text("ID")),
+                DataColumn(Text("Nome")),
+                DataColumn(Text("Sobrenome")),
+                DataColumn(Text("Contrato")),
+                DataColumn(Text("Status")),
+            ],
+            expand=True,
+            show_checkbox_column=True,
+            sort_column_index=0,
+            sort_ascending=True,
+            on_select_all=True
+
+        )
+
+        # estou chamando a tebela dentro do espaço criado no "Grid" acima
+        self.list_view_table_cartridges.controls.append(self.tabela)
 
         return Column(
 
@@ -140,7 +165,7 @@ class PainelProfessor(UserControl):
         validacoes = 0
 
         if self.t_field_name.value != "":
-            if re.match(regex_nome, self.t_field_name.value):
+            if re.match(regex_nome, self.t_field_name.value.replace(" ", "").capitalize()):
                 self.t_field_name.error_text = ""
                 self.t_field_name.update()
                 validacoes += 1
@@ -152,7 +177,7 @@ class PainelProfessor(UserControl):
             self.t_field_name.update()
 
         if self.t_field_sobrenome.value != "":
-            if re.match(regex_sobreNome, self.t_field_sobrenome.value):
+            if re.match(regex_sobreNome, self.t_field_sobrenome.value.replace(" ", "").capitalize()):
                 self.t_field_sobrenome.error_text = ""
                 self.t_field_sobrenome.update()
                 validacoes += 1
@@ -176,7 +201,7 @@ class PainelProfessor(UserControl):
 
 
             self.list_prof.controls.append(Checkbox(
-                label=f"{self.t_field_name.value} | {self.t_field_sobrenome.value} | {self.drop_contrato.value}"))
+                label=f"{self.t_field_name.value.replace(" ", "").capitalize()} | {self.t_field_sobrenome.value.replace(" ", "").capitalize()} | {self.drop_contrato.value}"))
             self.t_field_name.value = ""
             self.t_field_sobrenome.value = ""
             self.update()
