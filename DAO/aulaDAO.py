@@ -1,4 +1,7 @@
 import mysql.connector
+from DAO.turmaDao import *
+from DAO.professorDAO import *
+from DAO.materiaDAO import *
 
 
 def conected():
@@ -52,6 +55,23 @@ def addAula2(data_aula, numero_aula):
             cursor.close()
             conn.close()
 
+def addAulaTeste(idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""
+            INSERT INTO aula (idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula) 
+            values(%s,%s,%s,%s,%s,%s)
+            
+            """, (idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula))
+        conn.commit()
+        print("Cadastrado com sucesso!")
+    except mysql.connector.Error as error:
+        print("Erro ao cadastrar aula:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
 
 
 
@@ -60,6 +80,16 @@ def addAula2(data_aula, numero_aula):
 
 
 if __name__ == '__main__':
-    pass
+    serie="6"
+    sigla="A"
+    nome="Tereza"
+    sobrenome="Jojo"
+    materia="ingles"
+    data="2024-04-08"
+    n_aula="1"
+    id_turma=selecionarTurma(serie,sigla)
+    id_prof=selecionarIDDoProfessor(nome,sobrenome)
+    id_materia=selecionarMateria(materia)
+    print(f"id turma {id_turma}  id prof{id_prof} id materia {id_materia}")
 
-addAula2('2024-03-30','10')
+

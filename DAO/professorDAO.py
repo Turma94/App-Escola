@@ -119,6 +119,22 @@ def selecionarIdProfessor(nome, sobrenome):
             conn.close()
 
 
+def selecionarIDDoProfessor(nome, sobrenome):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT professor.id FROM usuarios JOIN professor ON 
+        usuarios.id = professor.idUsuario WHERE usuarios.nome = %s AND usuarios.sobreNome = %s""",
+                       (nome, sobrenome))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar professor:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 
 if __name__ == '__main__':
 
