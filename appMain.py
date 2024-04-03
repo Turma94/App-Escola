@@ -8,6 +8,7 @@ from views.painels.painelUsuarios import PainelUsuario
 from views.painels.painelMateria import PainelMateria
 from views.painels.painelTurma import PainelTurma
 from views.painels.painelAulaMatriz import PainelAulaMatriz
+from views.painels.painelHome import PainelHome
 def main(page:Page):
 
     page.window_min_width=1100
@@ -74,6 +75,9 @@ def main(page:Page):
     optionsMenu.on_change=change_options_menu_left
 
 
+    # Painel Home
+    painelHome=PainelHome()
+
     #Painel Professor
     painelProf = PainelProfessor()
     painelProf.visible=False
@@ -114,6 +118,7 @@ def main(page:Page):
                     route="/home",
                     controls=[
                         barHome,
+                        painelHome,
                         painelProf,
                         painelAula,
                         painelUsuario,
