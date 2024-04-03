@@ -86,9 +86,25 @@ def atualizarTurma(anoLetivo, periodo, serie, sigla, serie_antiga, sigla_antiga)
             conn.close()
 
 
+def selecionarIdTurma(id):
+    conn, cursor = connect()
+    try:
+        cursor.execute("""SELECT turma.serie, turma.sigla FROM turma  
+        WHERE turma.id = %s """,
+                       (id,))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar turma:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 if __name__ == '__main__':
-    for i in selectTurma():
-        print(i[4])
+    # for i in selectTurma():
+    #     print(i[4])
 
     # data=dt.date(2024,7,22)
     # inserirTurma("2024","Tarde","4","A")
@@ -102,4 +118,5 @@ if __name__ == '__main__':
     # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
     #atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')
-    print(selectTurma())
+    # print(selectTurma())
+    print(selecionarIdTurma(3))

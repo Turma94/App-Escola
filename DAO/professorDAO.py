@@ -46,9 +46,9 @@ def atualizarProfessor(categoria, email):
                        "usuarios WHERE email = %s)",
                        (categoria, email))
         conn.commit()
-        print("Usuario e registros relacionados atualizada com sucesso.")
+        print("Professor e registros relacionados atualizada com sucesso.")
     except mysql.connector.Error as error:
-        print("Erro ao atualizar usuario:", error)
+        print("Erro ao atualizar professor:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
@@ -64,7 +64,7 @@ def selecionarEmailProfessor(emailUsuario):
         lista = cursor.fetchall()
         return lista
     except mysql.connector.Error as error:
-        print("Erro ao buscar usuario:", error)
+        print("Erro ao buscar professor:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
@@ -80,7 +80,7 @@ def selecionarProfessor():
         lista = cursor.fetchall()
         return lista
     except mysql.connector.Error as error:
-        print("Erro ao buscar usuario:", error)
+        print("Erro ao buscar professor:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
@@ -95,7 +95,7 @@ def selecionarIdProfessor(nome, sobrenome):
         lista = cursor.fetchall()
         return lista
     except mysql.connector.Error as error:
-        print("Erro ao buscar usuario:", error)
+        print("Erro ao buscar professor:", error)
     finally:
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
