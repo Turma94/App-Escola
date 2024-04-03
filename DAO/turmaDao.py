@@ -6,7 +6,7 @@ def connect():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='123',
         database='escola'
     )
     cursor = conn.cursor()
@@ -16,8 +16,8 @@ def connect():
 def inserirTurma(ano_letivo, periodo, serie, sigla_turma):
     conn, cursor = connect()
     try:
-        cursor.execute("""INSERT INTO turma (anoLetivo,periodo,serie,sigla)
-    VALUES(%s,%s,%s,%s)""", (ano_letivo, periodo, serie, sigla_turma))
+        cursor.execute("""INSERT INTO turma (serie,sigla,anoLetivo,periodo)
+    VALUES(%s,%s,%s,%s)""", (serie, sigla_turma, ano_letivo, periodo,))
         conn.commit()
         print("Turma e registros relacionados adicionados com sucesso.")
     except mysql.connector.Error as error:
@@ -102,3 +102,4 @@ if __name__ == '__main__':
     # atualizarTurma('2023', 'MANHA', '9', 'N', '9','N')
     # print(selectTurma('2','B'))
     #atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')
+    print(selectTurma())

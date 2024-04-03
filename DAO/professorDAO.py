@@ -5,7 +5,7 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='123',
         database='escola'
     )
     cursor = conn.cursor()
@@ -55,12 +55,43 @@ def atualizarProfessor(categoria, email):
             conn.close()
 
 
-def selecionarProfessor(emailUsuario):
+def selecionarEmailProfessor(emailUsuario):
     conn, cursor = conected()
     try:
         cursor.execute("""SELECT usuarios.nome, usuarios.email, professor.categoria FROM usuarios JOIN professor ON 
         usuarios.id = professor.idUsuario WHERE usuarios.email = %s""",
                        (emailUsuario,))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar usuario:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
+def selecionarProfessor():
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT usuarios.nome, usuarios.sobreNome FROM usuarios JOIN professor ON 
+        usuarios.id = professor.idUsuario""",
+                       )
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar usuario:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+def selecionarIdProfessor(nome, sobrenome):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT usuarios.id FROM usuarios JOIN professor ON 
+        usuarios.id = professor.idUsuario WHERE usuarios.nome = %s AND usuarios.sobreNome = %s""",
+                       (nome, sobrenome))
         lista = cursor.fetchall()
         return lista
     except mysql.connector.Error as error:
@@ -80,4 +111,6 @@ if __name__ == '__main__':
 # atualizarProfessor('ESTAGIO', 'nicollas@gmail.com')
 # print(selecionarProfessor('VANESSA@contato.com'))
 # atualizarProfessor('EVENTUAL','VANESSA@contato.com')
-addProfessor('Maria', 'Rocha', 'EFETIVO')
+# addProfessor('Maria', 'Rocha', 'EFETIVO')
+
+print(selecionarIdProfessor('nicolas','gama'))

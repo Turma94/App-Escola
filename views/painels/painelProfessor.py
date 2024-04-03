@@ -201,7 +201,7 @@ class PainelProfessor(UserControl):
 
 
             self.list_prof.controls.append(Checkbox(
-                label=f"{self.t_field_name.value.replace(" ", "").capitalize()} | {self.t_field_sobrenome.value.replace(" ", "").capitalize()} | {self.drop_contrato.value}"))
+                label=f"{self.t_field_name.value.replace(' ', '').capitalize()} | {self.t_field_sobrenome.value.replace(' ', '').capitalize()} | {self.drop_contrato.value}"))
             self.t_field_name.value = ""
             self.t_field_sobrenome.value = ""
             self.update()
