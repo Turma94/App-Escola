@@ -1,6 +1,7 @@
 from flet import *
 import re
-
+from DAO.professorDAO import (selecionarProfessor,selecionarProfessor_porID,addProfessor)
+from DAO.usuarioDAO import listarUsuario
 class NewProfessor(UserControl):
     def __init__(self, name, sobrenome, contrato, delete_prof):
         super().__init__()
@@ -91,18 +92,43 @@ class NewProfessor(UserControl):
 
 
 class PainelProfessor(UserControl):
+    # def __init__(self):
+    #     super.__init__()
+    #     self.drop_idUsuario = Dropdown(
+    #         expand=True,
+    #         label="Usuarios"
+    #         )
+
+    def carregarTabela(self):
+        for professor in selecionarProfessor():
+            self.tabela.rows.append(DataRow(
+
+                cells=[
+                    DataCell(Text(professor[0])),
+                    DataCell(Text(professor[1])),
+                    DataCell(Text(professor[2])),
+                    DataCell(Text(professor[3]))
+                ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
+                                                     )))
+
     def build(self):
+
+
         self.titulo=Text("Professor", size=38)
+        # self.idUsuario=TextField(label="Digite o id do usuario")
+
+        # self.carregarIdUSuarios()
         self.t_field_name = TextField(label="Nome")
         self.t_field_sobrenome = TextField(label="Sobrenome",)
         self.drop_contrato=Dropdown(
             label="Contrato",
             hint_text="Escolha um tipo de contrato",
             options=[
-                dropdown.Option("CLT"),
+                dropdown.Option("EFETIVO"),
                 dropdown.Option("EVENTUAL"),
                 dropdown.Option("ESTAGIO"),
             ]
+
 
         )
 
@@ -123,7 +149,7 @@ class PainelProfessor(UserControl):
                 DataColumn(Text("Nome")),
                 DataColumn(Text("Sobrenome")),
                 DataColumn(Text("Contrato")),
-                DataColumn(Text("Status")),
+
             ],
             expand=True,
             show_checkbox_column=True,
@@ -136,6 +162,9 @@ class PainelProfessor(UserControl):
         # estou chamando a tebela dentro do espaço criado no "Grid" acima
         self.list_view_table_cartridges.controls.append(self.tabela)
 
+
+
+        self.carregarTabela()
         return Column(
 
 
@@ -144,19 +173,32 @@ class PainelProfessor(UserControl):
                 Divider(thickness=2),
                 Row(
                     controls=[
-                        Row(controls=[self.t_field_name, self.t_field_sobrenome, self.drop_contrato]),
+                        Row(controls=[self.t_field_name,self.t_field_sobrenome,
+                                      self.drop_contrato]),
                         FloatingActionButton(icon=icons.ADD, on_click=self.validar_campos),
 
                     ], alignment=MainAxisAlignment.CENTER
                 ),
-                Row(controls=[self.list_prof], alignment=MainAxisAlignment.CENTER)
+                Row(controls=[self.list_view_table_cartridges], alignment=MainAxisAlignment.CENTER)
             ]
 
         )
 
-    def prof_delete(self, professor):
-        self.list_prof.controls.remove(professor)
-        self.update()
+    # def mostrar_nome_sobrenome(self):
+    #     for usuario in selecionarProfessor_porID(1):
+    #         self.t_field_name.value=usuario[0]
+    #         self.t_field_sobrenome.value = usuario[1]
+    #
+    #     self.t_field_name.update()
+    #     self.t_field_sobrenome.update()
+
+    # def carregarIdUSuarios(self):
+    #     for ids in listarUsuario():
+    #         self.drop_idUsuario.options.append(ids)
+
+    # def prof_delete(self, professor):
+    #     self.list_prof.controls.remove(professor)
+    #     self.update()
 
     def validar_campos(self, e):
         regex_nome = r'^[a-zA-Z\s]+$'
@@ -197,11 +239,18 @@ class PainelProfessor(UserControl):
             self.drop_contrato.update()
 
         if validacoes == 3:
+            addProfessor(self.t_field_name.value,self.t_field_sobrenome.value,self.drop_contrato.value)
 
 
 
-            self.list_prof.controls.append(Checkbox(
-                label=f"{self.t_field_name.value.replace(' ', '').capitalize()} | {self.t_field_sobrenome.value.replace(' ', '').capitalize()} | {self.drop_contrato.value}"))
+
+            # self.list_prof.controls.append(Checkbox(
+            #     label=f"{self.t_field_name.value.replace(' ', '').capitalize()} | {self.t_field_sobrenome.value.replace(' ', '').capitalize()} | {self.drop_contrato.value}"))
+            #
+            self.tabela.rows.clear()
+            self.carregarTabela()
+            self.tabela.update()
+
             self.t_field_name.value = ""
             self.t_field_sobrenome.value = ""
             self.update()

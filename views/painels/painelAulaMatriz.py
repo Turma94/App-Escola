@@ -2,7 +2,7 @@ from flet import *
 from DAO.turmaDao import selectTurma
 from DAO.professorDAO import selecionarProfessor
 from DAO.materiaDAO import listarMaterias
-
+from datetime import datetime
 class PainelAulaMatriz(Container):
 
     def __init__(self, page: Page):
@@ -24,14 +24,13 @@ class PainelAulaMatriz(Container):
             expand=True,
             label="Turma")
         self.carregarTurma()
-
-
-        self.campo_meses=Dropdown(
-            expand=True,
-            label="Mês"
+        self.data = DatePicker(
+        # on_change=change_date,
+        first_date=datetime(2023, 10, 1),
+        last_date=datetime(2024, 10, 1)
         )
-        self.carregarMeses()
-        self.ano = TextField(label="Ano")
+
+
         self.page = page
         self.gridAulas=GridView(auto_scroll=True)
         self.coluna_aulas=Column()
@@ -50,7 +49,7 @@ class PainelAulaMatriz(Container):
             expand=True,
             label="Prof Presente")
         self.carregarProfessor()
-
+        self.icon_data=IconButton(icon=icons.DATA_ARRAY)
         self.drop_materia =Dropdown(
             expand=True,
             label="Matéria")
@@ -60,7 +59,7 @@ class PainelAulaMatriz(Container):
             controls=[
                 Row(controls=[self.title], alignment=MainAxisAlignment.CENTER),
                 Row(controls=
-                    [self.drop_turma,self.drop_serie,self.ano,self.campo_meses]),
+                    [self.drop_turma,self.drop_serie,self.icon_data]),
                 Divider(),
                 Row(controls=[self.aula,self.p_resp,self.p_presente,self.drop_materia, self.status,self.btnCadastrar])
             ]
@@ -78,11 +77,7 @@ class PainelAulaMatriz(Container):
                 dropdown.Option(f"{turma[3]}"),
             )
 
-    def carregarMeses(self):
-        for mes in self.meses:
-            self.campo_meses.options.append(
-                dropdown.Option(mes)
-            )
+
 
     def carregarNumeroAula(self):
 
