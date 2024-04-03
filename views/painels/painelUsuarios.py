@@ -205,8 +205,8 @@ class PainelUsuario(Container):
                                             DataCell(Text(usuario[1])),
                                             DataCell(Text(usuario[2])),
                                             DataCell(Text(usuario[4])),
-                                            DataCell(Text(usuario[5])),
-                                            DataCell(Text(usuario[6])),
+                                            DataCell(Text(usuario[5]))
+
 
                                         ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
 

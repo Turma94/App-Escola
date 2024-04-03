@@ -7,6 +7,7 @@ from views.painels.painelAulas import PainelAula
 from views.painels.painelUsuarios import PainelUsuario
 from views.painels.painelMateria import PainelMateria
 from views.painels.painelTurma import PainelTurma
+from views.painels.painelAulaMatriz import PainelAulaMatriz
 def main(page:Page):
 
     page.window_min_width=1100
@@ -78,7 +79,7 @@ def main(page:Page):
     painelProf.visible=False
 
     #Painel Aula
-    painelAula = PainelAula(page)
+    painelAula = PainelAulaMatriz(page)
 
 
     #Painel usuario

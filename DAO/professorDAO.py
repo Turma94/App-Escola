@@ -5,7 +5,7 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='123',
+        password='',
         database='escola'
     )
     cursor = conn.cursor()
@@ -74,8 +74,9 @@ def selecionarEmailProfessor(emailUsuario):
 def selecionarProfessor():
     conn, cursor = conected()
     try:
-        cursor.execute("""SELECT usuarios.nome, usuarios.sobreNome FROM usuarios JOIN professor ON 
-        usuarios.id = professor.idUsuario""",
+        cursor.execute("""SELECT professor.id, usuarios.nome, usuarios.sobreNome, professor.categoria
+        FROM usuarios 
+        JOIN professor  ON usuarios.id = professor.idUsuario""",
                        )
         lista = cursor.fetchall()
         return lista
