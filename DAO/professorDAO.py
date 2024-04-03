@@ -5,7 +5,7 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='123',
+        password='',
         database='escola'
     )
     cursor = conn.cursor()
@@ -70,12 +70,29 @@ def selecionarEmailProfessor(emailUsuario):
             cursor.close()
             conn.close()
 
+def selecionarProfessor_porID(id):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT usuarios.nome, usuarios.sobreNome  
+        FROM usuarios 
+        JOIN professor ON usuarios.id = professor.idUsuario 
+        WHERE usuarios.id = %s""",
+                       (id,))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar professor:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
 
 def selecionarProfessor():
     conn, cursor = conected()
     try:
-        cursor.execute("""SELECT usuarios.nome, usuarios.sobreNome FROM usuarios JOIN professor ON 
-        usuarios.id = professor.idUsuario""",
+        cursor.execute("""SELECT professor.id, usuarios.nome, usuarios.sobreNome, professor.categoria
+        FROM usuarios 
+        JOIN professor  ON usuarios.id = professor.idUsuario""",
                        )
         lista = cursor.fetchall()
         return lista
@@ -123,9 +140,25 @@ def encontrarProfessor(nome, sobrenome):
 
 
 
+def selecionarIDDoProfessor(nome, sobrenome):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""SELECT professor.id FROM usuarios JOIN professor ON 
+        usuarios.id = professor.idUsuario WHERE usuarios.nome = %s AND usuarios.sobreNome = %s""",
+                       (nome, sobrenome))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar professor:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 
 if __name__ == '__main__':
-    pass
+
 
 #
 # addProfessor('ESTAGIO', 'nicollas@gmail.com')
@@ -134,4 +167,5 @@ if __name__ == '__main__':
 # atualizarProfessor('EVENTUAL','VANESSA@contato.com')
 # addProfessor('Maria', 'Rocha', 'EFETIVO')
 
-print(selecionarIdProfessor('nicolas','gama'))
+# print(selecionarIdProfessor('nicolas','gama'))
+    print(selecionarProfessor_porID(1))

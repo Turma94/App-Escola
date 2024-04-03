@@ -5,7 +5,7 @@ def connect():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='123',
+        password='',
         database='escola'
     )
     cursor = conn.cursor()
@@ -34,6 +34,21 @@ def listarMaterias():
     conn.close()
     return lista
 
+def selecionarMateria(nome):
+    conn, cursor = connect()
+    try:
+        cursor.execute("""SELECT id  
+           FROM materia 
+           WHERE nome like %s""",
+                       (nome,))
+        lista = cursor.fetchall()
+        return lista
+    except mysql.connector.Error as error:
+        print("Erro ao buscar id da materia:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
 
 def atualizarMateria(nome, nome_antigo):
     conn, cursor = connect()
@@ -57,4 +72,4 @@ if __name__ == '__main__':
     for materia in listarMaterias():
         print(materia)
 
-atualizarMateria('Religião', 'Religiao')
+    atualizarMateria('Religião', 'Religiao')

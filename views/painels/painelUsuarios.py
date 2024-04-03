@@ -48,7 +48,7 @@ class PainelUsuario(Container):
         )
 
         self.list_view_table_cartridges.controls.append(self.tabela)
-
+        self.carregarTabela()
         self.content=Column(controls=[
             Row(controls=[self.titulo], alignment=MainAxisAlignment.CENTER),
             Divider(thickness=2),
@@ -68,11 +68,10 @@ class PainelUsuario(Container):
         ], alignment=MainAxisAlignment.SPACE_AROUND)
 
 
-        self.offset = transform.Offset(0, 0)
-        self.animate_offset = animation.Animation(500)
+
         self.visible = False
 
-        self.carregarTabela()
+
 
     def validarCamposCadastro(self, e):
         regex_nome = r'^[a-zA-Z\s]+$'
@@ -206,7 +205,8 @@ class PainelUsuario(Container):
                                             DataCell(Text(usuario[2])),
                                             DataCell(Text(usuario[4])),
                                             DataCell(Text(usuario[5])),
-                                            DataCell(Text(usuario[6])),
+                                            DataCell(Text(usuario[6]))
+
 
                                         ], on_select_changed=lambda e: print(f"linha selecionado: {e}"
 

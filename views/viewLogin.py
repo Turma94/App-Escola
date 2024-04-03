@@ -52,6 +52,7 @@ class ViewLogin(UserControl):
                                 if usuario[5] != "COMUM":
 
                                     self.page.go("/home")
+                                    break
                                 else:
                                     self.t_fild_login.error_text = "*Este usuario não tem permissão!"
                                     self.t_fild_login.update()
