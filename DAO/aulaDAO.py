@@ -12,17 +12,25 @@ def conected():
     return conn, cursor
 
 
-def addAula(serie, sigla, nome, sobrenome, materia, data, n_aula):
+def addAula(nome, sobrenome, serie, sigla, materia, data_aula, numero_aula):
     conn, cursor = conected()
     try:
         cursor.execute("""
-            INSERT INTO aula (idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula) 
-            SELECT t.id, p.id, p.id, m.id, %s, %s
-            FROM turma t 
-            JOIN usuarios p ON p.nome = %s AND p.sobreNome = %s 
+            SELECT professor.id 
+            FROM professor 
+            JOIN usuarios ON usuarios.id = professor.idUsuario 
+            WHERE usuarios.nome = %s AND usuarios.sobreNome = %s
+        """, (nome, sobrenome))
+        id_usuario = cursor.fetchone()[0]
+
+        cursor.execute("""
+            INSERT INTO aula (idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula)
+            SELECT t.id, pr.id, pr.id, m.id, %s, %s 
+            FROM professor pr      
+            JOIN turma t ON t.serie = %s AND t.sigla = %s
             JOIN materia m ON m.nome = %s 
-            WHERE t.serie = %s AND t.sigla = %s
-            """, (data, n_aula, nome, sobrenome, materia, serie, sigla))
+            WHERE pr.id = %s;
+        """, (data_aula, numero_aula, serie, sigla, materia, id_usuario))
         conn.commit()
         print("Cadastrado com sucesso!")
     except mysql.connector.Error as error:
@@ -31,35 +39,10 @@ def addAula(serie, sigla, nome, sobrenome, materia, data, n_aula):
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
             conn.close()
-
-def addAula2(data_aula, numero_aula):
-    conn, cursor = conected()
-    try:
-        cursor.execute("""
-            INSERT INTO aula (idTurma, idProfessorResponsavel, idProfessorPresente, idMateria, data_aula, numeroAula) 
-            SELECT t.id, p.id, p.id, m.id, %s, %s 
-            FROM turma t 
-            JOIN usuarios p ON p.nome = 'nicolas' AND p.sobreNome = 'gama' 
-            JOIN materia m ON m.nome = 'Matematica' 
-            WHERE t.serie = 9 AND t.sigla = 'N';
-        """, (data_aula, numero_aula))
-        conn.commit()
-        print("Cadastrado com sucesso!")
-    except mysql.connector.Error as error:
-        print("Erro ao cadastrar aula:", error)
-    finally:
-        if 'conn' in locals() and conn.is_connected():
-            cursor.close()
-            conn.close()
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
     pass
 
-addAula2('2024-03-30','10')
+addAula('nicolas','gama','6', 'A', 'Matematica','2024-12-10',9)
+# print(encontrarProfessor('nicolas', 'gama'))

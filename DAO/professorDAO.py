@@ -101,6 +101,27 @@ def selecionarIdProfessor(nome, sobrenome):
             cursor.close()
             conn.close()
 
+def encontrarProfessor(nome, sobrenome):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""
+            SELECT COUNT(*) FROM professor p
+            JOIN usuarios u ON p.idUsuario = u.id
+            WHERE u.nome = %s AND u.sobreNome = %s
+        """, (nome, sobrenome))
+        resultado = cursor.fetchone()[0]
+        if resultado > 0:
+            print("Professor encontrado!")
+        else:
+            print("Professor não encontrado.")
+    except mysql.connector.Error as error:
+        print("Erro ao verificar professor:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 
 
 if __name__ == '__main__':
