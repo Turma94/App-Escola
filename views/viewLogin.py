@@ -39,10 +39,15 @@ class ViewLogin(UserControl):
             if validar_email(self.t_fild_login.value):
                 for usuario in listarUsuario():
 
+                    print(usuario[3])
+                    print(usuario[5])
+                    print(usuario[4])
+                    print("============")
+
+
                     if usuario[4] == self.t_fild_login.value:
                         self.t_fild_login.error_text = ""
                         self.t_fild_login.update()
-
                         if testarSenha(self.t_fild_passWord.value):
                             senhaCript = criptografarSenha(self.t_fild_passWord.value)
                             self.t_fild_passWord.error_text = ""
@@ -56,19 +61,26 @@ class ViewLogin(UserControl):
                                 else:
                                     self.t_fild_login.error_text = "*Este usuario não tem permissão!"
                                     self.t_fild_login.update()
+                                    break
 
                             else:
                                 self.t_fild_passWord.error_text = "*senha incorreta"
                                 self.t_fild_passWord.update()
+                                break
                         else:
                             self.t_fild_passWord.error_text = "*a senha deve conter 4 caracteres"
                             self.t_fild_passWord.update()
+                            break
                     else:
                         self.t_fild_login.error_text = "*e-mail não cadastrado"
                         self.t_fild_login.update()
+
+
             else:
                 self.t_fild_login.error_text = "*e-mail invalido"
                 self.t_fild_login.update()
+
+
         else:
             self.t_fild_login.error_text = "*Campo obrigatorio"
             self.t_fild_login.update()

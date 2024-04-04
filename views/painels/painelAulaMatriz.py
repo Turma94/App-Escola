@@ -3,6 +3,12 @@ from DAO.turmaDao import selectTurma
 from DAO.professorDAO import selecionarProfessor
 from DAO.materiaDAO import listarMaterias
 from datetime import datetime
+from DAO.materiaDAO import selecionarMateria
+from DAO.professorDAO import selecionarIDDoProfessor
+from DAO.turmaDao import selecionarTurma
+from DAO.aulaDAO import addAula
+import re
+
 class PainelAulaMatriz(Container):
 
     def __init__(self, page: Page):
@@ -13,7 +19,7 @@ class PainelAulaMatriz(Container):
                       'ago', 'set', 'out', 'nov', 'dez']
 
         self.title = Text("Cadastrar Aulas", size=38)
-        self.btnCadastrar = IconButton(icon=icons.ADD)
+        self.btnCadastrar = IconButton(icon=icons.ADD, on_click=self.adicionarAula)
         self.status=Checkbox(label="Status")
         self.drop_serie= Dropdown(
             expand=True,
@@ -124,6 +130,128 @@ class PainelAulaMatriz(Container):
         self.t_field_data.value=f"{valores.year}-{valores.month}-{valores.day}"
         self.t_field_data.update()
 
+    def adicionarAula(self, e):
+                     # unico padrão aceito 'ano-mes-dia' ex: '2024-04-04'
+        regex_1 = r'^\d{4}-\d{2}-\d{2}$'
+        regex_2 = r'^\d{4}-\d{1}-\d{2}$'
+        regex_3 = r'^\d{4}-\d{2}-\d{1}$'
+        regex_4 = r'^\d{4}-\d{1}-\d{1}$'
+
+        totalValidacoes = 0
+    ################################################################
+        outraValida = 0
+
+        if self.drop_turma.value != None:
+            self.drop_turma.error_text = ""
+            self.drop_turma.update()
+            outraValida += 1
+        else:
+            self.drop_turma.error_text = "*Campo obrigatorio"
+            self.drop_turma.update()
+
+        if self.drop_serie.value != None:
+            self.drop_serie.error_text = ""
+            self.drop_serie.update()
+            outraValida += 1
+        else:
+            self.drop_serie.error_text = "*Campo obrigatorio"
+            self.drop_serie.update()
+
+        if outraValida == 2:
+
+            if len(selecionarTurma(self.drop_serie.value, self.drop_turma.value)) == 1:
+                self.drop_serie.error_text = ""
+                self.drop_serie.update()
+                self.drop_turma.error_text = ""
+                self.drop_turma.update()
+                totalValidacoes +=1
+            else:
+                self.drop_serie.error_text = "*A combinação entre turma e serie não existe"
+                self.drop_serie.update()
+                self.drop_turma.error_text = "*A combinação entre turma e serie não existe"
+                self.drop_turma.update()
+
+                     ################################################################
+        if self.t_field_data.value != "":
+
+            if re.match(regex_1, self.t_field_data.value) or re.match(regex_2, self.t_field_data.value) or re.match(regex_3, self.t_field_data.value) or re.match(regex_4, self.t_field_data.value):
+
+                semiValidacoes = 0
+
+                if (int(self.t_field_data.value.split("-")[1]) <= 12) and (int(self.t_field_data.value.split("-")[1]) >= 1):
+                    self.t_field_data.error_text = ""
+                    self.t_field_data.update()
+                    semiValidacoes += 1
+                else:
+                    self.t_field_data.error_text = "*mes invalido"
+                    self.t_field_data.update()
+
+                if int(self.t_field_data.value.split("-")[0]) >= int(datetime.today().year):
+                    self.t_field_data.error_text = ""
+                    self.t_field_data.update()
+                    semiValidacoes += 1
+                else:
+                    self.t_field_data.error_text = f"*Ano não pode ser meno que {datetime.today().year}"
+                    self.t_field_data.update()
+
+                if semiValidacoes == 2:
+                    self.t_field_data.error_text = ""
+                    self.t_field_data.update()
+                    totalValidacoes += 1
+
+            else:
+                self.t_field_data.error_text = "*Data invalida"
+                self.t_field_data.update()
+        else:
+            self.t_field_data.error_text = "*Campo obrigatorio"
+            self.t_field_data.update()
+
+################################################################
+
+        if self.aula.value != None:
+            self.aula.error_text = ""
+            self.aula.update()
+            totalValidacoes += 1
+        else:
+            self.aula.error_text = "*Campo obrigatorio"
+            self.aula.update()
+
+################################################################
+        if self.p_resp.value != None:
+            self.p_resp.error_text = ""
+            self.p_resp.update()
+            totalValidacoes += 1
+        else:
+            self.p_resp.error_text = "*Campo obrigatorio"
+            self.p_resp.update()
+
+################################################################
+
+        if self.p_presente.value != None:
+            self.p_presente.error_text = ""
+            self.p_presente.update()
+            totalValidacoes += 1
+        else:
+            self.p_presente.error_text = "*Campo obrigatorio"
+            self.p_presente.update()
+################################################################
+
+        if self.drop_materia.value != None:
+            self.drop_materia.error_text = ""
+            self.drop_materia.update()
+            totalValidacoes += 1
+
+        else:
+            self.drop_materia.error_text = "*Campo obrigatorio"
+            self.drop_materia.update()
+
+        if totalValidacoes == 6:
+            id_materia = selecionarMateria(self.drop_materia.value)
+            id_prof_resp = selecionarIDDoProfessor(self.p_resp.value.split(" ")[0], self.p_resp.value.split(" ")[1])
+            id_prof_presnt = selecionarIDDoProfessor(self.p_presente.value.split(" ")[0], self.p_presente.value.split(" ")[1])
+            id_turma = selecionarTurma(self.drop_serie.value, self.drop_turma.value,)
+
+            #addAula(id_turma, id_prof_resp, id_prof_presnt, id_materia, self.t_field_data.value, self.aula.value)
 
 
 class AulaModal(Container):

@@ -169,7 +169,7 @@ class PainelUsuario(Container):
                        self.t_field_sobrenome.value.replace(" ", "").capitalize(),
                        criptografarSenha(self.t_field_senha.value),
                        self.t_field_email.value,
-                       self.drop_nivel.value, "False")
+                       self.drop_nivel.value, 1)
 
             self.t_field_nome.value = ""
             self.t_field_nome.update()
