@@ -5,7 +5,7 @@ def conected():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='123',
         database='escola'
     )
     cursor = conn.cursor()
@@ -87,12 +87,12 @@ if __name__ == '__main__':
     #            "sobralcomix@gmail.com","COMUM")
     #
     #
-    addUsuario("Maria",
+    addUsuario("Igor",
                "Rocha",
                "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-               "maria@gmail.com",
+               "igor@gmail.com",
                "ADMINISTRADOR",
-               True)
+               'True')
     #
     # addUsuario("IAN","Silva","03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4","ian@gmail.com","COMUM")
 

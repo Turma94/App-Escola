@@ -41,8 +41,27 @@ def addAula(nome, sobrenome, serie, sigla, materia, data_aula, numero_aula):
             conn.close()
 
 
+def buscarAula(serie, sigla, data_aula):
+    conn, cursor = conected()
+    try:
+        cursor.execute("""
+            SELECT * FROM aula a
+            JOIN turma t ON t.serie = %s AND t.sigla = %s
+            WHERE a.idTurma = t.id AND data_aula = %s
+            """, (serie, sigla, data_aula))
+        busca = cursor.fetchall()
+        return busca
+    except mysql.connector.Error as error:
+        print("Erro ao buscar aula:", error)
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
 if __name__ == '__main__':
     pass
 
-addAula('nicolas','gama','6', 'A', 'Matematica','2024-12-10',9)
-# print(encontrarProfessor('nicolas', 'gama'))
+    # addAula('nicolas','gama','5', 'B', 'Matematica','2024-9-9',9)
+    # print(encontrarProfessor('nicolas', 'gama'))
+    print(buscarAula('6', 'A', '2024-12-10'))

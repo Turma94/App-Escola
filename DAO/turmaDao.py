@@ -6,7 +6,7 @@ def connect():
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='123',
         database='escola'
     )
     cursor = conn.cursor()
@@ -120,3 +120,4 @@ if __name__ == '__main__':
     #atualizarTurma('2025', 'NOITE', '6', 'A', '8', 'B')
     # print(selectTurma())
     print(selecionarIdTurma(3))
+    inserirTurma('2024-03-12','MANHA','5','B')
